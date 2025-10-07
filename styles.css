@@ -1,20 +1,56 @@
+/* 1. Rendre l'image "couverture" cliquable */
+.cover-img {
+    width: 100%;
+    cursor: pointer;
+}
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+/* 2. Styliser le menu */
+#menu {
     text-align: center;
+    margin-top: 20px;
 }
 
-.welcome-page {
-    margin-top: 50px;
+#menu h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
 }
 
-#cover-img {
-    max-width: 100%;
+#image-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
-button {
-    margin: 10px;
+.image-container {
+    margin: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.image-item {
+    width: 200px;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.image-container p {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* 3. Styliser les boutons de navigation pour les PDF */
+.pdf-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pdf-nav button {
     padding: 10px 20px;
     background-color: #00bcd4;
     color: white;
@@ -22,15 +58,36 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+.pdf-nav button:hover {
     background-color: #0097a7;
 }
 
-#menu {
-    margin-top: 30px;
+/* 4. Bouton "Retour" */
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-/* 1. Rendre le bouton "Cliquez ici pour accéder" plus visible et superposé sur l'image */
+.btn:hover {
+    background-color: #e53935;
+}
+
+/* 5. Style général pour la page d'accueil */
+.welcome-page {
+    position: relative;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+.welcome-page img {
+    width: 100%;
+    height: auto;
+}
+
 .access-btn {
     position: absolute;
     top: 50%;
@@ -45,58 +102,12 @@ button:hover {
     z-index: 10;
 }
 
-.welcome-page {
-    position: relative;
-    text-align: center;
-}
-
-#welcome-page img {
-    width: 100%;
-    height: auto;
-}
-
-/* 2. Afficher les images verticalement */
-#image-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.image-container {
-    margin: 20px;
-    text-align: center;
-}
-
-.image-item {
-    width: 200px; /* Ajustez la taille de l'image */
-    height: auto;
-    cursor: pointer;
-}
-
-/* 3. Styliser les images avec titre */
-.image-container p {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* 4. Styliser les boutons de navigation pour les PDF */
-#pdf-viewer {
-    display: flex;
-    justify-content: space-between;
+/* 6. PDF Viewer */
+#pdfViewer {
+    overflow-y: auto;
+    max-height: 80vh; /* Limiter la hauteur du PDF */
     margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
 }
-
-#pdf-viewer button {
-    padding: 10px 20px;
-    background-color: #00bcd4;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-#pdf-viewer button:hover {
-    background-color: #0097a7;
-}
-
