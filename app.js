@@ -42,6 +42,9 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
+    // Ajouter un log pour vérifier l'URL du PDF
+    console.log("Tentative de chargement du PDF : ", pdfPath);
+
     // Modifier l'URL pour refléter l'ouverture du PDF
     const pdfName = pdfPath.split("/").pop().split(".")[0];  // Exemple : "antibiorein" pour antibiotique rénal
     history.pushState(null, '', `#/${pdfName}`);
@@ -64,7 +67,6 @@ export function openPDF(pdfPath) {
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
-    // Créer un bouton "Retour" pour revenir au menu principal
     const backButton = document.createElement("button");
     backButton.textContent = "Retour";
     backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
@@ -75,8 +77,13 @@ export function openPDF(pdfPath) {
     // Ajouter le bouton "Retour" en dessous des autres boutons
     appContainer.appendChild(backButton);
 
-    // Charger le PDF sans utiliser de worker (approche simple)
+    // Ajouter un log avant d'essayer de charger le PDF avec PDF.js
+    console.log("Chargement du PDF avec pdf.js à partir du chemin : ", pdfPath);
+
+    // Charger le PDF sans utiliser de worker
     const pdfUrl = './pdf/' + pdfPath;
+    console.log("URL complète du PDF : ", pdfUrl);
+
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         renderPage(currentPage);  // Afficher la première page du PDF
@@ -84,6 +91,7 @@ export function openPDF(pdfPath) {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
+
 
 // 3. Fonction pour afficher une page spécifique
 function renderPage(pageNum) {
