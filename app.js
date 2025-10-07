@@ -42,6 +42,8 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
+pdfjsLib.disableWorker = true;
+    
     // Ajouter un log pour vérifier l'URL du PDF
     console.log("Tentative de chargement du PDF : ", pdfPath);
 
