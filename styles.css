@@ -19,8 +19,8 @@
 /* 3. Modifier la présentation des images dans le menu */
 #image-list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;  /* Permettre aux images de se disposer en ligne */
+    justify-content: center;  /* Centrer les images */
     margin-top: 20px;
 }
 
@@ -28,18 +28,20 @@
     margin: 20px;
     text-align: center;
     cursor: pointer;
+    flex: 1 1 100%; /* Permettre aux images de s'étendre pleinement */
 }
 
 .image-item {
-    width: 100%; /* Les images occuperont toute la largeur disponible */
-    height: auto;
+    width: 100%; /* Les images occuperont toute la largeur du conteneur */
+    height: auto; /* Laisser l'aspect de l'image intact */
+    object-fit: cover; /* Faire en sorte que les images remplissent l'espace sans déformation */
     border: 1px solid #ddd;
     border-radius: 10px;
-    object-fit: cover; /* Assure une bonne résolution des images */
 }
 
+/* Supprimer les titres sous les images */
 .image-container p {
-    display: none; /* Supprimer les titres sous les images */
+    display: none; /* Ne plus afficher les titres sous les images */
 }
 
 /* 4. Styliser les boutons de navigation pour les PDF */
