@@ -5,6 +5,7 @@ let pdfDoc = null;    // Référence au document PDF
 document.getElementById('cover-img').addEventListener('click', function() {
     document.querySelector('.welcome-page').style.display = 'none';  // Cacher la page d'accueil
     document.getElementById('menu').style.display = 'block';  // Afficher le menu
+    document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
     populateMenu();  // Remplir le menu avec les liens des PDF
 });
 
