@@ -71,10 +71,21 @@
     color: white;
     border: none;
     cursor: pointer;
+    position: relative;
+    z-index: 10; /* Mettre un z-index plus élevé que le footer pour qu'il soit visible au-dessus */
+    display: block;
+    width: 200px; /* Largeur du bouton */
+    margin-left: auto; /* Centrer horizontalement */
+    margin-right: auto;
+    margin-bottom: 20px; /* Ajouter une marge pour que le bouton ne soit pas trop collé à l'iframe */
 }
 
 .btn:hover {
     background-color: #e53935;
+}
+
+#app {
+    margin-bottom: 80px;  /* Ajouter de la marge en bas pour ne pas être recouvert par le footer */
 }
 
 /* 6. Style général pour la page d'accueil */
@@ -256,6 +267,7 @@ footer {
     bottom: 0;  /* Placer le footer tout en bas */
     width: 100%;  /* Prendre toute la largeur de la page */
     box-sizing: border-box;  /* Assurer que le padding ne dépasse pas la largeur */
+    z-index: 5;  /* Positionner le footer derrière le bouton "Retour" */
 }
 
 footer p {
