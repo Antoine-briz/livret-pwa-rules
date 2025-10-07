@@ -42,8 +42,9 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
-pdfjsLib.disableWorker = true;
-    
+    // Désactiver l'utilisation du worker dans pdf.js
+    pdfjsLib.disableWorker = true;
+
     // Ajouter un log pour vérifier l'URL du PDF
     console.log("Tentative de chargement du PDF : ", pdfPath);
 
@@ -79,9 +80,6 @@ pdfjsLib.disableWorker = true;
     // Ajouter le bouton "Retour" en dessous des autres boutons
     appContainer.appendChild(backButton);
 
-    // Ajouter un log avant d'essayer de charger le PDF avec PDF.js
-    console.log("Chargement du PDF avec pdf.js à partir du chemin : ", pdfPath);
-
     // Charger le PDF sans utiliser de worker
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
@@ -93,7 +91,6 @@ pdfjsLib.disableWorker = true;
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
-
 
 // 3. Fonction pour afficher une page spécifique
 function renderPage(pageNum) {
