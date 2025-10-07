@@ -151,3 +151,38 @@ body {
 #image-list img:hover {
     transform: scale(1.1);  /* Légère augmentation de taille au survol */
 }
+
+/* Styliser les boutons "Table des matières" et "Table des abréviations" */
+#table-of-contents, #abbreviations {
+    background-color: #007BFF;  /* Couleur bleue */
+    color: white;
+    font-size: 24px;  /* Augmenter la taille du texte */
+    padding: 20px 40px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;  /* Placer chaque bouton sur une nouvelle ligne */
+    margin: 15px 0;  /* Espacement entre les boutons */
+    cursor: pointer;
+    text-align: center; /* Centrer le texte */
+    display: block; /* Forcer chaque bouton à prendre toute la largeur */
+}
+
+#table-of-contents:hover, #abbreviations:hover {
+    background-color: #0056b3;  /* Couleur bleue plus foncée au survol */
+    transition: background-color 0.3s ease;  /* Animation douce au survol */
+}
+
+/* Ajouter un petit effet d'ombre au texte pour le rendre plus visible */
+#table-of-contents, #abbreviations {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
+}
+
+/* Ajouter une animation de survol aux boutons */
+#table-of-contents:hover, #abbreviations:hover {
+    transform: scale(1.05);  /* Légère augmentation de la taille au survol */
+}
+
+/* Appliquer un peu de marge autour de la section des boutons pour les espacer du reste du contenu */
+#table-of-contents, #abbreviations {
+    margin-top: 30px;  /* Ajouter un espacement au-dessus */
+}
