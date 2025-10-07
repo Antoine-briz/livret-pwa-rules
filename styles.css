@@ -191,11 +191,12 @@ body {
 }
 
 /* 10. Mettre en forme le conteneur du PDF (iframe) */
+/* 10. Mettre en forme le conteneur du PDF (iframe) */
 #pdfViewer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;  /* Augmenter la hauteur à 90% de la hauteur de la fenêtre */
+    align-items: flex-start;  /* Alignement du PDF en haut du conteneur */
+    height: 90vh;  /* Ajuster la hauteur de l'iframe */
     width: 100%;   /* Prendre toute la largeur disponible */
     overflow: auto;  /* Permettre le défilement */
     background-color: #f0f0f0;
@@ -208,6 +209,7 @@ iframe {
     height: 100%;    /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
     border: none;    /* Enlever la bordure de l'iframe */
 }
+
 
 /* 11. Appliquer la police élégante pour le titre */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora:wght@700&display=swap');
