@@ -47,6 +47,10 @@ function populateMenu() {
 
 function openPDF(pdfName) {
     const appContainer = document.getElementById("app");
+    if (!appContainer) {
+        console.error("Le conteneur avec l'ID 'app' n'a pas été trouvé.");
+        return; // Stop the function if 'app' is not found
+    }
 
     // Effacer le contenu existant
     appContainer.innerHTML = "";
