@@ -257,3 +257,16 @@ footer p {
     margin: 0;  /* Enlever la marge par défaut autour du paragraphe */
 }
 
+/* Styliser les images dans le menu */
+#image-list img {
+    width: 100%;    /* Rendre les images aussi larges que possible (toute la largeur) */
+    height: auto;   /* Conserver la proportion des images */
+    margin-bottom: 10px;
+    transition: transform 0.3s ease; /* Transition pour un effet de zoom au survol */
+    object-fit: cover;  /* Assurer que l'image couvre toute la largeur sans déformation */
+}
+
+#image-list img:hover {
+    transform: scale(1.05); /* Légère augmentation de taille au survol */
+}
+
