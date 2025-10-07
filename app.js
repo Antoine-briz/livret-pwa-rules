@@ -41,6 +41,9 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
+    // Assure-toi que le chemin complet vers le PDF est correct
+    const pdfUrl = './pdf/' + pdfPath;  // Ajoute le répertoire 'pdf/' devant le chemin
+
     const pdfName = pdfPath.split("/").pop().split(".")[0];
     history.pushState(null, '', `#/${pdfName}`);
     console.log('Current URL:', window.location.href);
@@ -68,11 +71,15 @@ export function openPDF(pdfPath) {
     });
     appContainer.appendChild(backButton);
 
-    pdfjsLib.getDocument(pdfPath).promise.then(pdfDoc_ => {
+    // Utilise le chemin corrigé pour ouvrir le PDF
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         renderPage(currentPage);
+    }).catch((error) => {
+        console.error("Erreur lors du chargement du PDF :", error);
     });
 }
+
 
 // 3. Fonction pour afficher une page spécifique
 function renderPage(pageNum) {
