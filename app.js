@@ -1,4 +1,4 @@
-document.getElementById('access-btn').addEventListener('click', function() {
+document.getElementById('cover-img').addEventListener('click', function() {
     document.querySelector('.welcome-page').style.display = 'none';
     document.getElementById('menu').style.display = 'block';
     populateMenu();
@@ -46,5 +46,78 @@ function populateMenu() {
 }
 
 function openPDF(pdfName) {
-    window.location.href = 'pdf/' + pdfName;
+    const appContainer = document.getElementById("app");
+
+    // Effacer le contenu existant
+    appContainer.innerHTML = "";
+
+    // Créer un div pour le PDF avec une barre de défilement
+    const pdfViewer = document.createElement("div");
+    pdfViewer.id = "pdfViewer";
+    appContainer.appendChild(pdfViewer);
+
+    // Modifier l'URL pour refléter l'ouverture du PDF
+    const pdfPath = 'pdf/' + pdfName;
+
+    // Créer les boutons de navigation pour le PDF
+    const navContainer = document.createElement("div");
+    navContainer.classList.add("pdf-nav");
+
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Précédent";
+    prevButton.addEventListener("click", () => goToPage(currentPage - 1));
+
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Suivant";
+    nextButton.addEventListener("click", () => goToPage(currentPage + 1));
+
+    navContainer.appendChild(prevButton);
+    navContainer.appendChild(nextButton);
+    appContainer.appendChild(navContainer);
+
+    // Créer un bouton "Retour" pour revenir au menu principal
+    const backButton = document.createElement("button");
+    backButton.textContent = "Retour";
+    backButton.classList.add("btn");
+    backButton.addEventListener("click", () => {
+        document.querySelector('.welcome-page').style.display = 'none';
+        document.getElementById('menu').style.display = 'block';
+        appContainer.innerHTML = '';
+    });
+
+    appContainer.appendChild(backButton);
+
+    // Charger le PDF avec PDF.js
+    pdfjsLib.getDocument(pdfPath).promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        renderPage(currentPage);
+    });
+}
+
+// Fonction pour afficher une page spécifique
+function renderPage(pageNum) {
+    const viewer = document.getElementById('pdfViewer');
+
+    // Vérifier les limites des pages
+    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
+
+    pdfDoc.getPage(pageNum).then(page => {
+        const canvas = document.createElement('canvas');
+        viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
+        viewer.appendChild(canvas);
+
+        const context = canvas.getContext('2d');
+        const viewport = page.getViewport({ scale: 1.5 });
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+            currentPage = pageNum;
+        });
+    });
+}
+
+// Fonction pour aller à une page spécifique
+function goToPage(pageNum) {
+    renderPage(pageNum);
 }
