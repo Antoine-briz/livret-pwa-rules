@@ -41,6 +41,8 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
+pdfjsLib.GlobalWorkerOptions.workerSrc = './libs/pdf.worker.min.js';
+    
     // Assure-toi que le chemin complet vers le PDF est correct
     const pdfUrl = './pdf/' + pdfPath;  // Ajoute le répertoire 'pdf/' devant le chemin
 
