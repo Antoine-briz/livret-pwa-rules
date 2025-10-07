@@ -173,4 +173,12 @@ function populateMenu() {
         // Ajouter l'élément div au conteneur du menu
         imgContainer.appendChild(imgDiv);
     });
+  // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
+    document.getElementById("table-of-contents").addEventListener("click", function() {
+        openPDF("tablemetiere.pdf");  // Ouvrir le PDF des tables des matières
+    });
+
+    document.getElementById("abbreviations").addEventListener("click", function() {
+        openPDF("tableabrev.pdf");  // Ouvrir le PDF des tables des abréviations
+    });
 }
