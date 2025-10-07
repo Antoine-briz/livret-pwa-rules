@@ -1,4 +1,3 @@
-
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open('pwa-cache').then((cache) => {
@@ -10,7 +9,14 @@ self.addEventListener('install', (event) => {
                 '/manifest.json',
                 '/img/couverture.png',
                 '/icons/icon-192.png',
-                '/icons/icon-512.png'
+                '/icons/icon-512.png',
+                '/pdf/echographie.pdf',
+                '/pdf/ventilation.pdf',
+                '/pdf/bacterio.pdf',
+                '/pdf/dialyse.pdf',
+                '/pdf/eeg.pdf',
+                '/pdf/systeme.pdf',
+                '/pdf/medicaments.pdf'
             ]);
         })
     );
