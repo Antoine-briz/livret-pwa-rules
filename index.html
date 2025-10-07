@@ -10,18 +10,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
-    <div class="welcome-page">
-        <h2 id="livret-title">Livret de réanimation clinique</h2> 
-        <img src="img/couverture.png" alt="Couverture" id="cover-img" class="cover-img">
-    </div>
+   <!-- Page d'accueil -->
+<div class="welcome-page">
+    <h2 id="livret-title" style="display: none;">Livret de réanimation clinique</h2> <!-- Masqué sur la page d'accueil -->
+    <img src="img/couverture.png" alt="Couverture" id="cover-img" class="cover-img">
+</div>
 
-    <div id="menu" style="display: none;">
-        <button id="table-of-contents">Table des matières</button>
-        <button id="abbreviations">Table des abréviations</button>
-        <div id="image-list">
-            <!-- Images de PDF seront affichées ici -->
-        </div>
+<!-- Menu avec les liens vers les PDF -->
+<div id="menu" style="display: none;">
+    <h2 id="livret-title-menu">Livret de réanimation clinique</h2> <!-- Titre sur la page du menu -->
+    <button id="table-of-contents">Table des matières</button>
+    <button id="abbreviations">Table des abréviations</button>
+    <div id="image-list">
+        <!-- Images de PDF seront affichées ici -->
     </div>
+</div>
 
     <!-- Conteneur pour afficher le PDF -->
     <div id="app"></div> <!-- Ce conteneur doit exister pour afficher les PDF -->
