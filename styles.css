@@ -16,6 +16,7 @@
     color: #333;
 }
 
+/* 3. Modifier la présentation des images dans le menu */
 #image-list {
     display: flex;
     flex-direction: column;
@@ -30,20 +31,18 @@
 }
 
 .image-item {
-    width: 200px;
+    width: 100%; /* Les images occuperont toute la largeur disponible */
     height: auto;
     border: 1px solid #ddd;
     border-radius: 10px;
+    object-fit: cover; /* Assure une bonne résolution des images */
 }
 
 .image-container p {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+    display: none; /* Supprimer les titres sous les images */
 }
 
-/* 3. Styliser les boutons de navigation pour les PDF */
+/* 4. Styliser les boutons de navigation pour les PDF */
 .pdf-nav {
     display: flex;
     justify-content: space-between;
@@ -62,7 +61,7 @@
     background-color: #0097a7;
 }
 
-/* 4. Bouton "Retour" */
+/* 5. Bouton "Retour" */
 .btn {
     margin-top: 20px;
     padding: 10px 20px;
@@ -76,7 +75,7 @@
     background-color: #e53935;
 }
 
-/* 5. Style général pour la page d'accueil */
+/* 6. Style général pour la page d'accueil */
 .welcome-page {
     position: relative;
     text-align: center;
@@ -102,7 +101,7 @@
     z-index: 10;
 }
 
-/* 6. PDF Viewer */
+/* 7. PDF Viewer */
 #pdfViewer {
     overflow-y: auto;
     max-height: 80vh; /* Limiter la hauteur du PDF */
@@ -116,7 +115,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;  /* Ajuste la hauteur pour laisser de l'espace pour les boutons */
+    height: 90vh;  /* Ajuste la hauteur pour laisser de l'espace pour les boutons */
     overflow: hidden;
 }
 
@@ -141,18 +140,20 @@ body {
     font-family: 'Calibri', sans-serif; /* Police élégante pour tout le texte */
 }
 
+/* 8. Styliser les images de section dans le menu */
 #image-list img {
-    width: 200%;  /* 2 fois plus grand qu'avant */
-    height: auto;
+    width: 100%;  /* Rendre les images aussi larges que possible (toute la largeur) */
+    height: auto;   /* Conserver la proportion des images */
     margin-bottom: 10px;
     transition: transform 0.3s ease; /* Transition pour un effet de zoom au survol */
+    object-fit: cover;  /* Assurer que l'image couvre toute la largeur sans déformation */
 }
 
 #image-list img:hover {
-    transform: scale(1.1);  /* Légère augmentation de taille au survol */
+    transform: scale(1.05); /* Légère augmentation de taille au survol */
 }
 
-/* Styliser les boutons "Table des matières" et "Table des abréviations" */
+/* 9. Styliser les boutons "Table des matières" et "Table des abréviations" */
 #table-of-contents, #abbreviations {
     background-color: #007BFF;  /* Couleur bleue */
     color: white;
@@ -187,7 +188,7 @@ body {
     margin-top: 30px;  /* Ajouter un espacement au-dessus */
 }
 
-/* Mettre en forme le conteneur du PDF (iframe) */
+/* 10. Mettre en forme le conteneur du PDF (iframe) */
 #pdfViewer {
     display: flex;
     justify-content: center;
@@ -206,7 +207,7 @@ iframe {
     border: none;    /* Enlever la bordure de l'iframe */
 }
 
-/* Appliquer la police élégante pour le titre */
+/* 11. Appliquer la police élégante pour le titre */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora:wght@700&display=swap');
 
 /* Titre "Livret de réanimation clinique" */
@@ -239,7 +240,7 @@ iframe {
     opacity: 1;
 }
 
-/* Styliser le footer */
+/* 12. Styliser le footer */
 footer {
     background-color: #f8f9fa;  /* Couleur de fond claire */
     color: #2a3d6b;  /* Couleur bleue élégante */
@@ -256,17 +257,3 @@ footer {
 footer p {
     margin: 0;  /* Enlever la marge par défaut autour du paragraphe */
 }
-
-/* Styliser les images dans le menu */
-#image-list img {
-    width: 100%;    /* Rendre les images aussi larges que possible (toute la largeur) */
-    height: auto;   /* Conserver la proportion des images */
-    margin-bottom: 10px;
-    transition: transform 0.3s ease; /* Transition pour un effet de zoom au survol */
-    object-fit: cover;  /* Assurer que l'image couvre toute la largeur sans déformation */
-}
-
-#image-list img:hover {
-    transform: scale(1.05); /* Légère augmentation de taille au survol */
-}
-
