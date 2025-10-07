@@ -100,9 +100,12 @@ export function openPDF(pdfPath) {
 
 
 // 3. Fonction pour afficher une page spécifique
+// Fonction pour afficher une page spécifique du PDF avec un ajustement de zoom
 function renderPage(pageNum) {
     const viewer = document.getElementById('pdfViewer');
-    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;  // Vérifier si la page est valide
+
+    // Vérifier les limites des pages
+    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
 
     pdfDoc.getPage(pageNum).then(page => {
         const canvas = document.createElement('canvas');
@@ -110,7 +113,13 @@ function renderPage(pageNum) {
         viewer.appendChild(canvas);
 
         const context = canvas.getContext('2d');
-        const viewport = page.getViewport({ scale: 1.5 });  // Ajuster le zoom si nécessaire
+
+        // Calculer l'échelle en fonction de la hauteur de l'iframe
+        const scale = viewer.clientHeight / page.getViewport({ scale: 1 }).height;
+
+        // Ajuster la taille du canvas pour remplir l'iframe tout en gardant l'aspect du PDF
+        const viewport = page.getViewport({ scale: scale });
+
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
@@ -120,6 +129,7 @@ function renderPage(pageNum) {
         });
     });
 }
+
 
 // 4. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
