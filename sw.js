@@ -24,7 +24,9 @@ const FILES_TO_CACHE = [
   '/pdf/dialyse.pdf',
   '/pdf/eeg.pdf',
   '/pdf/systeme.pdf', 
-  '/pdf/medicaments.pdf'
+  '/pdf/medicaments.pdf',
+  '/pdf/tablemetiere.pdf',
+  '/pdf/tableabrev.pdf',
   // Ajoutez tous les autres fichiers PDF nécessaires ici
 ];
 
