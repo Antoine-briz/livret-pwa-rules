@@ -1,3 +1,9 @@
+document.getElementById('cover-img').addEventListener('click', function() {
+    document.querySelector('.welcome-page').style.display = 'none';  // Cacher la page d'accueil
+    document.getElementById('menu').style.display = 'block';  // Afficher le menu
+    populateMenu();  // Remplir le menu avec les liens des PDF
+});
+
 let currentPage = 1;  // Page actuelle
 let pdfDoc = null;    // Référence au document PDF
 
