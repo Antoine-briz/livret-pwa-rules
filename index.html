@@ -6,17 +6,17 @@
     <title>Livret PWA</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    
     <!-- Charger PDF.js à partir du CDN -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
     <div class="welcome-page">
+        <!-- Remplacer "Menu" par le nouveau titre -->
+        <h2 id="livret-title">Livret de réanimation clinique</h2> 
         <img src="img/couverture.png" alt="Couverture" id="cover-img" class="cover-img">
     </div>
 
     <div id="menu" style="display: none;">
-        <h2>Menu</h2>
         <button id="table-of-contents">Table des matières</button>
         <button id="abbreviations">Table des abréviations</button>
         <div id="image-list">
