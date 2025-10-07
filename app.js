@@ -1,8 +1,7 @@
-// Variables globales pour la gestion du PDF
 let currentPage = 1;  // Page actuelle
 let pdfDoc = null;    // Référence au document PDF
 
-// 1. Déclaration de la fonction openPDF en mode exportable
+// 1. Déclaration de la fonction openPDF (avec `export` pour pouvoir l'utiliser ailleurs)
 export function openPDF(pdfPath) {
     const appContainer = document.getElementById("app");
     if (!appContainer) {
@@ -83,12 +82,16 @@ function goToPage(pageNum) {
 
 // 4. Gestion du changement de route en fonction de l'URL (hash)
 const routes = {
-    "#/": renderHome,
-    "#/adaptee/SARM": () => openPDF('./pdf/SARM.pdf'),
-    "#/adaptee/ampC": () => openPDF('./pdf/ampC.pdf'),
-    "#/antibiorein": () => openPDF('./pdf/antibiorein.pdf'),
-    "#/antibiomoda": () => openPDF('./pdf/antibiomoda.pdf')
-    // Ajoute d'autres routes ici si nécessaire
+    "#/": renderHome, // Route pour la page d'accueil
+    "#/table-des-matieres": () => openPDF('./pdf/tablematiere.pdf'),
+    "#/table-des-abreviations": () => openPDF('./pdf/tableabrev.pdf'),
+    "#/echographie": () => openPDF('./pdf/echographie.pdf'),
+    "#/ventilation": () => openPDF('./pdf/ventilation.pdf'),
+    "#/bacterio": () => openPDF('./pdf/bacterio.pdf'),
+    "#/dialyse": () => openPDF('./pdf/dialyse.pdf'),
+    "#/eeg": () => openPDF('./pdf/eeg.pdf'),
+    "#/systeme": () => openPDF('./pdf/systeme.pdf'),
+    "#/medicaments": () => openPDF('./pdf/medicaments.pdf')
 };
 
 // 5. Fonction de monté de contenu (équivalent de `mount` dans ton autre code)
@@ -99,7 +102,7 @@ window.addEventListener("hashchange", () => {
 
 window.addEventListener("load", () => {
     if (!location.hash) {
-        location.hash = "#/";
+        location.hash = "#/"; // Redirige vers la page d'accueil si aucun hash
     }
     console.log("Page loaded, current hash:", location.hash);
     mount();
