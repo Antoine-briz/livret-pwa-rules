@@ -152,13 +152,10 @@ function populateMenu() {
         imgElement.alt = item.name;
         imgElement.classList.add('image-item');
 
-        // Créer le titre en dessous de l'image
-        let title = document.createElement('p');
-        title.textContent = item.name;
 
         // Ajouter l'image et le titre à l'élément div
         imgDiv.appendChild(imgElement);
-        imgDiv.appendChild(title);
+       
 
         // Ajouter un événement pour ouvrir le PDF lorsque l'image est cliquée
         imgDiv.addEventListener('click', () => openPDF(item.pdf));
