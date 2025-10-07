@@ -1,5 +1,9 @@
-// 1. Fonction openPDF déplacée en haut du fichier
-function openPDF(pdfName) {
+// Variables globales pour la gestion du PDF
+let currentPage = 1;  // Page actuelle
+let pdfDoc = null;    // Référence au document PDF
+
+// 1. Déclaration de la fonction openPDF en mode exportable
+export function openPDF(pdfPath) {
     const appContainer = document.getElementById("app");
     if (!appContainer) {
         console.error("Le conteneur avec l'ID 'app' n'a pas été trouvé.");
@@ -15,7 +19,9 @@ function openPDF(pdfName) {
     appContainer.appendChild(pdfViewer);
 
     // Modifier l'URL pour refléter l'ouverture du PDF
-    const pdfPath = 'pdf/' + pdfName;
+    const pdfName = pdfPath.split("/").pop().split(".")[0]; // Exemple : "antibiorein" pour antibiotique rénal
+    history.pushState(null, '', `#/${pdfName}`);
+    console.log('Current URL:', window.location.href);
 
     // Créer les boutons de navigation pour le PDF
     const navContainer = document.createElement("div");
@@ -38,11 +44,8 @@ function openPDF(pdfName) {
     backButton.textContent = "Retour";
     backButton.classList.add("btn");
     backButton.addEventListener("click", () => {
-        document.querySelector('.welcome-page').style.display = 'none';
-        document.getElementById('menu').style.display = 'block';
-        appContainer.innerHTML = '';
+        window.location.hash = "#/";  // Redirige vers le menu principal
     });
-
     appContainer.appendChild(backButton);
 
     // Charger le PDF avec PDF.js
@@ -55,8 +58,6 @@ function openPDF(pdfName) {
 // 2. Fonction pour afficher une page spécifique
 function renderPage(pageNum) {
     const viewer = document.getElementById('pdfViewer');
-
-    // Vérifier les limites des pages
     if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
 
     pdfDoc.getPage(pageNum).then(page => {
@@ -65,7 +66,7 @@ function renderPage(pageNum) {
         viewer.appendChild(canvas);
 
         const context = canvas.getContext('2d');
-        const viewport = page.getViewport({ scale: 1.5 });
+        const viewport = page.getViewport({ scale: 1.5 });  // Ajuster le zoom si nécessaire
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
@@ -80,52 +81,44 @@ function goToPage(pageNum) {
     renderPage(pageNum);
 }
 
-// 4. Utilisation de DOMContentLoaded pour garantir que le DOM est prêt
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('cover-img').addEventListener('click', function() {
-        document.querySelector('.welcome-page').style.display = 'none';
-        document.getElementById('menu').style.display = 'block';
-        populateMenu();
-    });
+// 4. Gestion du changement de route en fonction de l'URL (hash)
+const routes = {
+    "#/": renderHome,
+    "#/adaptee/SARM": () => openPDF('./pdf/SARM.pdf'),
+    "#/adaptee/ampC": () => openPDF('./pdf/ampC.pdf'),
+    "#/antibiorein": () => openPDF('./pdf/antibiorein.pdf'),
+    "#/antibiomoda": () => openPDF('./pdf/antibiomoda.pdf')
+    // Ajoute d'autres routes ici si nécessaire
+};
 
-    function populateMenu() {
-        const imgList = [
-            { name: 'Echographie pratique', pdf: 'echographie.pdf', image: 'echographie.png' },
-            { name: 'Ventilation mécanique', pdf: 'ventilation.pdf', image: 'ventilation.png' },
-            { name: 'Bactériologie clinique', pdf: 'bacterio.pdf', image: 'bacterio.png' },
-            { name: 'Epuration extra-rénale', pdf: 'dialyse.pdf', image: 'dialyse.png' },
-            { name: 'EEG continu', pdf: 'eeg.pdf', image: 'eeg.png' },
-            { name: 'Maladies de système', pdf: 'systeme.pdf', image: 'systeme.png' },
-            { name: 'Médicaments et posologies', pdf: 'medicaments.pdf', image: 'medicaments.png' }
-        ];
-
-        const imgContainer = document.getElementById('image-list');
-        imgContainer.innerHTML = ''; // Clear previous content
-
-        imgList.forEach(item => {
-            // Create the image container
-            let imgDiv = document.createElement('div');
-            imgDiv.classList.add('image-container');
-            
-            // Create the image element
-            let imgElement = document.createElement('img');
-            imgElement.src = 'img/' + item.image;
-            imgElement.alt = item.name;
-            imgElement.classList.add('image-item');
-            
-            // Create the title below the image
-            let title = document.createElement('p');
-            title.textContent = item.name;
-            
-            // Append the image and title to the div
-            imgDiv.appendChild(imgElement);
-            imgDiv.appendChild(title);
-
-            // Make the entire div clickable to open the PDF
-            imgDiv.addEventListener('click', () => openPDF(item.pdf));
-            
-            // Append the image div to the container
-            imgContainer.appendChild(imgDiv);
-        });
-    }
+// 5. Fonction de monté de contenu (équivalent de `mount` dans ton autre code)
+window.addEventListener("hashchange", () => {
+    console.log("Hash changed:", location.hash);
+    mount();
 });
+
+window.addEventListener("load", () => {
+    if (!location.hash) {
+        location.hash = "#/";
+    }
+    console.log("Page loaded, current hash:", location.hash);
+    mount();
+});
+
+// Fonction pour afficher le contenu en fonction du hash actuel
+function mount() {
+    const route = routes[location.hash];
+    const appContainer = document.getElementById("app");
+
+    if (route) {
+        route();
+    } else {
+        console.error("No route found for", location.hash);
+        appContainer.innerHTML = "<h2>Page Non Trouvée</h2>"; // Affiche une erreur si la route n'est pas trouvée
+    }
+}
+
+// Fonction utilitaire pour encapsuler du HTML (si nécessaire)
+function h(cls, html) {
+    return `<div class="${cls}">${html}</div>`;
+}
