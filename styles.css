@@ -195,7 +195,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;  /* Augmenter la hauteur à 90% de la hauteur de la fenêtre */
+    height: 100vh;  /* Augmenter la hauteur à 90% de la hauteur de la fenêtre */
     width: 100%;   /* Prendre toute la largeur disponible */
     overflow: auto;  /* Permettre le défilement */
     background-color: #f0f0f0;
