@@ -206,3 +206,36 @@ iframe {
     border: none;    /* Enlever la bordure de l'iframe */
 }
 
+/* Appliquer la police élégante pour le titre */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora:wght@700&display=swap');
+
+/* Titre "Livret de réanimation clinique" */
+#livret-title, #livret-title-menu {
+    font-family: 'Lora', serif;  /* Choisir une police élégante (Lora) */
+    font-size: 3em;  /* Taille du titre */
+    font-weight: bold; /* Titre en gras */
+    color: #2a3d6b;  /* Couleur bleue élégante */
+    text-align: center; /* Centrer le titre */
+    margin-top: 50px;
+    text-transform: uppercase;  /* Mettre en majuscules */
+    letter-spacing: 2px;  /* Espacement des lettres pour un effet plus aérien */
+    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);  /* Ombre portée pour donner un effet de profondeur */
+    padding: 20px;
+}
+
+/* Effet de transition douce pour l'apparition du titre */
+#livret-title-menu {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#menu {
+    display: none;
+}
+
+/* Ajouter un effet lorsque le menu est activé */
+#menu {
+    display: block;
+    opacity: 1;
+}
+
