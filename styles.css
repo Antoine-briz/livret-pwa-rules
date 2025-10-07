@@ -137,3 +137,17 @@
     text-align: center;
 }
 
+body {
+    font-family: 'Calibri', sans-serif; /* Police élégante pour tout le texte */
+}
+
+#image-list img {
+    width: 200%;  /* 2 fois plus grand qu'avant */
+    height: auto;
+    margin-bottom: 10px;
+    transition: transform 0.3s ease; /* Transition pour un effet de zoom au survol */
+}
+
+#image-list img:hover {
+    transform: scale(1.1);  /* Légère augmentation de taille au survol */
+}
