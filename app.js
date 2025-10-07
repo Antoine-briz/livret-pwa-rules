@@ -20,7 +20,7 @@ function renderHome() {
     welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
 
     const description = document.createElement("p");
-    description.textContent = "Cliquez sur l'image de couverture pour accéder au menu.";
+    description.textContent = "Cliquez sur l'image pour continuer.";
 
     // Ajouter le contenu dans le conteneur #app
     appContainer.appendChild(welcomeMessage);
