@@ -73,12 +73,13 @@ export function openPDF(pdfPath) {
     appContainer.appendChild(navContainer);
 
     const backButton = document.createElement("button");
-    backButton.textContent = "Retour";
-    backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
-    backButton.addEventListener("click", () => {
-        window.location.hash = "#/";  // Redirige vers le menu principal
-    });
-
+backButton.textContent = "Retour";
+backButton.classList.add("btn");
+backButton.addEventListener("click", () => {
+    window.location.href = "https://antoine-briz.github.io/livret-pwa-rules/#";  // Redirige vers le menu principal
+});
+appContainer.appendChild(backButton);
+    
     // Ajouter le bouton "Retour" en dessous des autres boutons
     appContainer.appendChild(backButton);
 
