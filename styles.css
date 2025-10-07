@@ -111,3 +111,29 @@
     border-radius: 8px;
     padding: 10px;
 }
+
+#pdfViewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;  /* Ajuste la hauteur pour laisser de l'espace pour les boutons */
+    overflow: hidden;
+}
+
+.pdf-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.pdf-nav button {
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+#app {
+    margin-top: 20px;
+    text-align: center;
+}
+
