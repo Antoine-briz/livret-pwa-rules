@@ -27,7 +27,7 @@ function renderHome() {
     appContainer.appendChild(description);
 }
 
-// 2. Déclaration de la fonction openPDF (avec `export` pour pouvoir l'utiliser ailleurs)
+// 2. Déclaration de la fonction openPDF
 export function openPDF(pdfPath) {
     const appContainer = document.getElementById("app");
     if (!appContainer) {
@@ -35,21 +35,20 @@ export function openPDF(pdfPath) {
         return;
     }
 
-    appContainer.innerHTML = "";
+    appContainer.innerHTML = "";  // Vider l'élément #app avant de charger le PDF
 
+    // Créer un conteneur pour afficher le PDF
     const pdfViewer = document.createElement("div");
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = './libs/pdf.worker.min.js';
-    
-    // Assure-toi que le chemin complet vers le PDF est correct
-    const pdfUrl = './pdf/' + pdfPath;  // Ajoute le répertoire 'pdf/' devant le chemin
-
-    const pdfName = pdfPath.split("/").pop().split(".")[0];
+    // Modifier l'URL pour refléter l'ouverture du PDF
+    const pdfName = pdfPath.split("/").pop().split(".")[0];  // Exemple : "antibiorein" pour antibiotique rénal
     history.pushState(null, '', `#/${pdfName}`);
+
     console.log('Current URL:', window.location.href);
 
+    // Créer les boutons de navigation pour le PDF
     const navContainer = document.createElement("div");
     navContainer.classList.add("pdf-nav");
 
@@ -65,28 +64,31 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = './libs/pdf.worker.min.js';
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
+    // Créer un bouton "Retour" pour revenir au menu principal
     const backButton = document.createElement("button");
     backButton.textContent = "Retour";
-    backButton.classList.add("btn");
+    backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
     backButton.addEventListener("click", () => {
-        window.location.hash = "#/";  // Redirige vers la page d'accueil
+        window.location.hash = "#/";  // Redirige vers le menu principal
     });
+
+    // Ajouter le bouton "Retour" en dessous des autres boutons
     appContainer.appendChild(backButton);
 
-    // Utilise le chemin corrigé pour ouvrir le PDF
+    // Charger le PDF sans utiliser de worker (approche simple)
+    const pdfUrl = './pdf/' + pdfPath;
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-        renderPage(currentPage);
+        renderPage(currentPage);  // Afficher la première page du PDF
     }).catch((error) => {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
 
-
 // 3. Fonction pour afficher une page spécifique
 function renderPage(pageNum) {
     const viewer = document.getElementById('pdfViewer');
-    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
+    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;  // Vérifier si la page est valide
 
     pdfDoc.getPage(pageNum).then(page => {
         const canvas = document.createElement('canvas');
@@ -94,10 +96,11 @@ function renderPage(pageNum) {
         viewer.appendChild(canvas);
 
         const context = canvas.getContext('2d');
-        const viewport = page.getViewport({ scale: 1.5 });
+        const viewport = page.getViewport({ scale: 1.5 });  // Ajuster le zoom si nécessaire
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
+        // Rendu de la page sur le canvas
         page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
             currentPage = pageNum;
         });
@@ -150,48 +153,3 @@ function populateMenu() {
         imgContainer.appendChild(imgDiv);
     });
 }
-
-// 6. Fonction de monté de contenu (équivalent de `mount` dans ton autre code)
-window.addEventListener("hashchange", () => {
-    console.log("Hash changed:", location.hash);
-    mount();
-});
-
-window.addEventListener("load", () => {
-    if (!location.hash) {
-        location.hash = "#/"; // Redirige vers la page d'accueil si aucun hash
-    }
-    console.log("Page loaded, current hash:", location.hash);
-    mount();
-});
-
-// Fonction pour afficher le contenu en fonction du hash actuel
-function mount() {
-    const route = routes[location.hash];
-    const appContainer = document.getElementById("app");
-
-    if (route) {
-        route();
-    } else {
-        console.error("No route found for", location.hash);
-        appContainer.innerHTML = "<h2>Page Non Trouvée</h2>"; // Affiche une erreur si la route n'est pas trouvée
-    }
-}
-
-// Fonction utilitaire pour encapsuler du HTML (si nécessaire)
-function h(cls, html) {
-    return `<div class="${cls}">${html}</div>`;
-}
-
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then((registration) => {
-        console.log('Service Worker enregistré avec succès:', registration);
-      })
-      .catch((error) => {
-        console.log('Erreur lors de l\'enregistrement du Service Worker:', error);
-      });
-  });
-}
-
