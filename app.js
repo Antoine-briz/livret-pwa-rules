@@ -7,13 +7,13 @@ document.getElementById('access-btn').addEventListener('click', function() {
 
 function populateMenu() {
     const imgList = [
-        { name: 'echographie', pdf: 'echographie.pdf' },
-        { name: 'ventilation', pdf: 'ventilation.pdf' },
-        { name: 'bacterio', pdf: 'bacterio.pdf' },
-        { name: 'dialyse', pdf: 'dialyse.pdf' },
-        { name: 'eeg', pdf: 'eeg.pdf' },
-        { name: 'systeme', pdf: 'systeme.pdf' },
-        { name: 'medicaments', pdf: 'medicaments.pdf' }
+        { name: 'Echographie pratique', pdf: 'echographie.pdf' },
+        { name: 'Ventilation mécanique', pdf: 'ventilation.pdf' },
+        { name: 'Bactériologie clinique', pdf: 'bacterio.pdf' },
+        { name: 'Epuration extra-rénale', pdf: 'dialyse.pdf' },
+        { name: 'EEG continu', pdf: 'eeg.pdf' },
+        { name: 'Maladies de système', pdf: 'systeme.pdf' },
+        { name: 'Médicaments et posologies', pdf: 'medicaments.pdf' }
     ];
 
     const imgContainer = document.getElementById('image-list');
