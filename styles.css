@@ -186,3 +186,23 @@ body {
 #table-of-contents, #abbreviations {
     margin-top: 30px;  /* Ajouter un espacement au-dessus */
 }
+
+/* Mettre en forme le conteneur du PDF (iframe) */
+#pdfViewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;  /* Augmenter la hauteur à 90% de la hauteur de la fenêtre */
+    width: 100%;   /* Prendre toute la largeur disponible */
+    overflow: auto;  /* Permettre le défilement */
+    background-color: #f0f0f0;
+    border: 2px solid #ccc;
+    margin-top: 20px;
+}
+
+iframe {
+    width: 100%;     /* La largeur de l'iframe prendra toute la largeur disponible */
+    height: 100%;    /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
+    border: none;    /* Enlever la bordure de l'iframe */
+}
+
