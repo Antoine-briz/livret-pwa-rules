@@ -75,6 +75,25 @@ function renderPage(pageNum) {
     });
 }
 
+function renderHome() {
+    const appContainer = document.getElementById("app");
+
+    // Effacer le contenu existant
+    appContainer.innerHTML = "";
+
+    // Créer le contenu de la page d'accueil
+    const welcomeMessage = document.createElement("h2");
+    welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
+
+    const description = document.createElement("p");
+    description.textContent = "Cliquez sur l'image de couverture pour accéder au menu.";
+
+    // Ajouter le contenu dans le conteneur #app
+    appContainer.appendChild(welcomeMessage);
+    appContainer.appendChild(description);
+}
+
+
 // 3. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
     renderPage(pageNum);
@@ -127,21 +146,4 @@ function h(cls, html) {
 }
 
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
-function renderHome() {
-    const appContainer = document.getElementById("app");
-
-    // Effacer le contenu existant
-    appContainer.innerHTML = "";
-
-    // Créer le contenu de la page d'accueil
-    const welcomeMessage = document.createElement("h2");
-    welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
-
-    const description = document.createElement("p");
-    description.textContent = "Cliquez sur l'image de couverture pour accéder au menu.";
-
-    // Ajouter le contenu dans le conteneur #app
-    appContainer.appendChild(welcomeMessage);
-    appContainer.appendChild(description);
-}
 
