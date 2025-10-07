@@ -80,8 +80,9 @@ backButton.classList.add("btn");
 // Ajouter un événement "click" au bouton
 backButton.addEventListener("click", () => {
     console.log("Le bouton 'Retour' a été cliqué.");
-    history.pushState(null, '', '/livret-pwa-rules/');  
-    console.log("Redirection vers l'URL : ", window.location.hash);
+    console.log("L'URL actuelle est : ", window.location.href);
+    location.replace('#/');  // Essayer location.replace
+    console.log("Redirection vers l'URL : ", window.location.href);
 });
 
 appContainer.appendChild(backButton);
