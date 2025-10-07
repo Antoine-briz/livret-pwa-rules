@@ -35,7 +35,8 @@ export function openPDF(pdfPath) {
         return;
     }
 
-    appContainer.innerHTML = "";  // Vider l'élément #app avant de charger le PDF
+    // Vider l'élément #app avant de charger le PDF
+    appContainer.innerHTML = "";
 
     // Créer un conteneur pour afficher le PDF
     const pdfViewer = document.createElement("div");
@@ -80,6 +81,10 @@ export function openPDF(pdfPath) {
     // Ajouter le bouton "Retour" en dessous des autres boutons
     appContainer.appendChild(backButton);
 
+    // Cacher le menu et les autres éléments, afficher uniquement le PDF
+    document.getElementById('menu').style.display = 'none';  // Masquer le menu
+    document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
+
     // Charger le PDF sans utiliser de worker
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
@@ -91,6 +96,7 @@ export function openPDF(pdfPath) {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
+
 
 // 3. Fonction pour afficher une page spécifique
 function renderPage(pageNum) {
