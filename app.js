@@ -99,8 +99,6 @@ export function openPDF(pdfPath) {
 }
 
 
-// 3. Fonction pour afficher une page spécifique
-// Fonction pour afficher une page spécifique du PDF avec un ajustement de zoom
 function renderPage(pageNum) {
     const viewer = document.getElementById('pdfViewer');
 
@@ -114,10 +112,10 @@ function renderPage(pageNum) {
 
         const context = canvas.getContext('2d');
 
-        // Calculer l'échelle en fonction de la hauteur de l'iframe
-        const scale = viewer.clientHeight / page.getViewport({ scale: 1 }).height;
+        // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
+        const scale = 1.5;  // Zoom fixe qui garde une bonne qualité de lecture
 
-        // Ajuster la taille du canvas pour remplir l'iframe tout en gardant l'aspect du PDF
+        // Ajuster la taille du canvas en fonction du zoom
         const viewport = page.getViewport({ scale: scale });
 
         canvas.height = viewport.height;
@@ -129,6 +127,7 @@ function renderPage(pageNum) {
         });
     });
 }
+
 
 
 // 4. Fonction pour aller à une page spécifique
