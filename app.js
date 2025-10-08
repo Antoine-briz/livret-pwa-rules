@@ -101,10 +101,14 @@ export function openPDF(pdfPath) {
     const iframe = document.createElement("iframe");
     iframe.src = pdfUrl;
     iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
-    iframe.style.height = "80vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
-    iframe.style.transform = "scale(0.8)";  // Ajuster le zoom si nécessaire
-    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
+    iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
     iframe.style.border = "none";  // Enlever les bordures
+
+    // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
+    iframe.style.transform = "scale(0.6)";  // Ajuste le zoom si nécessaire
+    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
+
+    // Ajouter l'iframe à l'élément #pdfViewer
     pdfViewer.appendChild(iframe);
 
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
