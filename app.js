@@ -53,9 +53,6 @@ export function openPDF(pdfPath) {
     // Désactiver l'utilisation du worker dans pdf.js
     pdfjsLib.disableWorker = true;
 
-    // Ajouter un log pour vérifier l'URL du PDF
-    console.log("Tentative de chargement du PDF : ", pdfPath);
-
     // Modifier l'URL pour refléter l'ouverture du PDF
     const pdfName = pdfPath.split("/").pop().split(".")[0];  // Exemple : "antibiorein" pour antibiotique rénal
     history.pushState(null, '', `#/${pdfName}`);
@@ -110,20 +107,14 @@ export function openPDF(pdfPath) {
     iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
     iframe.style.border = "none";  // Enlever les bordures
 
-    // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
-    iframe.style.transform = "scale(0.5)";  // Ajuste le zoom si nécessaire
-    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
-
-    // Permettre le défilement horizontal si nécessaire
-    iframe.style.overflow = "auto"; // Permet le défilement
-
     // Ajouter l'iframe à l'élément #pdfViewer
     pdfViewer.appendChild(iframe);
 
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         
-        const scale = window.innerWidth < 768 ? 0.65 : 0.7;  // Zoom plus faible sur les petits écrans
+        // Appliquer le zoom via PDF.js : utiliser la largeur de l'écran pour déterminer le zoom
+        const scale = window.innerWidth < 768 ? 0.55 : 0.7;  // Zoom plus faible sur les petits écrans
         renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
     }).catch((error) => {
         console.error("Erreur lors du chargement du PDF :", error);
