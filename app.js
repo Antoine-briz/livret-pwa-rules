@@ -9,6 +9,14 @@ document.getElementById('cover-img').addEventListener('click', function() {
     populateMenu();  // Remplir le menu avec les liens des PDF
 });
 
+const routes = {
+    "#/": renderHome, // La route pour la page d'accueil
+    "#/menu": renderMenu, // La route pour le menu
+    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
+    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
+    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
+};
+
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
     const appContainer = document.getElementById("app");
@@ -187,13 +195,7 @@ function mount() {
 }
 
 // Routes de l'application
-const routes = {
-    "#/": renderHome, // La route pour la page d'accueil
-    "#/menu": renderMenu, // La route pour le menu
-    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
-    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
-    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
-};
+
 
 // 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
