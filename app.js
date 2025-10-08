@@ -205,33 +205,4 @@ function mount() {
 const routes = {
     "#/": renderHome, // La route pour la page d'accueil
     "#/menu": renderMenu, // La route pour le menu
-    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
-    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
-    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
-};
-
-// 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
-window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
-window.addEventListener("load", mount);  // Met à jour la page au chargement de la page
-
-// Fonction de renderHome pour afficher la page d'accueil
-function renderHome() {
-    const appContainer = document.getElementById("app");
-    appContainer.innerHTML = `
-        <h2>Bienvenue dans le livret PWA</h2>
-        <p>Choisissez un PDF à afficher :</p>
-        <button onclick="window.location.hash = '#/menu'">Menu</button>
-    `;
-}
-
-// Fonction pour afficher le menu avec les PDF disponibles
-function renderMenu() {
-    const appContainer = document.getElementById("app");
-    appContainer.innerHTML = `
-        <h2>Menu</h2>
-        <button onclick="window.location.hash = '#/echographie'">Echographie</button>
-        <button onclick="window.location.hash = '#/ventilation'">Ventilation</button>
-        <button onclick="window.location.hash = '#/bacterio'">Bactériologie</button>
-        <button onclick="window.location.hash = '#/dialyse'">Dialyse</button>
-    `;
-}
+    "#/echographie": () =>
