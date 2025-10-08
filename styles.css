@@ -7,7 +7,8 @@
 /* 2. Styliser le menu */
 #menu {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 0;          /* supprimer l'espace au-dessus */
+    padding-top: 10px;      /* petit padding si nécessaire */
 }
 
 #menu h2 {
@@ -19,13 +20,14 @@
 /* 3. Modifier la présentation des images dans le menu */
 #image-list {
     display: flex;
-    flex-wrap: wrap;  /* Permettre aux images de se disposer en ligne */
-    justify-content: center;  /* Centrer les images */
-    margin-top: 20px;
+    flex-direction: column; /* Aligner les images en colonne */
+    align-items: center;
+    margin-top: 0;          /* supprimer l'espace inutile */
+    padding: 0;
 }
 
 .image-container {
-    margin: 20px;
+    margin: 10px;
     text-align: center;
     cursor: pointer;
     flex: 1 1 100%; /* Permettre aux images de s'étendre pleinement */
@@ -47,7 +49,7 @@
 /* 4. Styliser les boutons de navigation pour les PDF */
 .pdf-nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Centrer les boutons de navigation */
     margin-top: 20px;
 }
 
@@ -90,262 +92,3 @@
 
 /* 6. Style général pour la page d'accueil */
 .welcome-page {
-    position: relative;
-    text-align: center;
-    background-color: #f4f4f4;
-}
-
-.welcome-page img {
-    width: 100%;
-    height: auto;
-}
-
-.access-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px;
-    padding: 15px 30px;
-    background-color: rgba(0, 188, 212, 0.8);
-    color: white;
-    border: none;
-    cursor: pointer;
-    z-index: 10;
-}
-
-/* 7. PDF Viewer */
-#pdfViewer {
-    overflow-y: auto;
-    max-height: 80vh; /* Limiter la hauteur du PDF */
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-}
-
-#pdfViewer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 90vh;  /* Ajuste la hauteur pour laisser de l'espace pour les boutons */
-    overflow: hidden;
-}
-
-.pdf-nav {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.pdf-nav button {
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-#app {
-    margin-top: 20px;
-    text-align: center;
-}
-
-body {
-    font-family: 'Calibri', sans-serif; /* Police élégante pour tout le texte */
-}
-
-/* 8. Styliser les images de section dans le menu */
-#image-list img {
-    width: 100%;  /* Rendre les images aussi larges que possible (toute la largeur) */
-    height: auto;   /* Conserver la proportion des images */
-    margin-bottom: 10px;
-    transition: transform 0.3s ease; /* Transition pour un effet de zoom au survol */
-    object-fit: cover;  /* Assurer que l'image couvre toute la largeur sans déformation */
-}
-
-#image-list img:hover {
-    transform: scale(1.05); /* Légère augmentation de taille au survol */
-}
-
-/* 9. Styliser les boutons "Table des matières" et "Table des abréviations" */
-#table-of-contents, #abbreviations {
-    background-color: #007BFF;  /* Couleur bleue */
-    color: white;
-    font-size: 24px;  /* Augmenter la taille du texte */
-    padding: 20px 40px;
-    border: none;
-    border-radius: 10px;
-    width: 100%;  /* Placer chaque bouton sur une nouvelle ligne */
-    margin: 15px 0;  /* Espacement entre les boutons */
-    cursor: pointer;
-    text-align: center; /* Centrer le texte */
-    display: block; /* Forcer chaque bouton à prendre toute la largeur */
-}
-
-#table-of-contents:hover, #abbreviations:hover {
-    background-color: #0056b3;  /* Couleur bleue plus foncée au survol */
-    transition: background-color 0.3s ease;  /* Animation douce au survol */
-}
-
-/* Ajouter un petit effet d'ombre au texte pour le rendre plus visible */
-#table-of-contents, #abbreviations {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
-}
-
-/* Ajouter une animation de survol aux boutons */
-#table-of-contents:hover, #abbreviations:hover {
-    transform: scale(1.05);  /* Légère augmentation de la taille au survol */
-}
-
-/* Appliquer un peu de marge autour de la section des boutons pour les espacer du reste du contenu */
-#table-of-contents, #abbreviations {
-    margin-top: 30px;  /* Ajouter un espacement au-dessus */
-}
-
-/* 10. Mettre en forme le conteneur du PDF (iframe) */
-
-#pdfViewer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;  /* Aligner le PDF en haut pour permettre le défilement */
-    height: 90vh;  /* Ajuster la hauteur de l'iframe à 90% de la fenêtre */
-    width: 100%;   /* Prendre toute la largeur disponible */
-    overflow: auto;  /* Permettre le défilement */
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
-    margin-top: 20px;
-}
-
-iframe {
-    width: 100%;     /* La largeur de l'iframe prendra toute la largeur disponible */
-    height: 100%;    /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
-    border: none;    /* Enlever la bordure de l'iframe */
-}
-
-
-/* 11. Appliquer la police élégante pour le titre */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora:wght@700&display=swap');
-
-/* Titre "Livret de réanimation clinique" */
-#livret-title, #livret-title-menu {
-    font-family: 'Lora', serif;  /* Choisir une police élégante (Lora) */
-    font-size: 3em;  /* Taille du titre */
-    font-weight: bold; /* Titre en gras */
-    color: #2a3d6b;  /* Couleur bleue élégante */
-    text-align: center; /* Centrer le titre */
-    margin-top: 50px;
-    text-transform: uppercase;  /* Mettre en majuscules */
-    letter-spacing: 2px;  /* Espacement des lettres pour un effet plus aérien */
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);  /* Ombre portée pour donner un effet de profondeur */
-    padding: 20px;
-}
-
-/* Effet de transition douce pour l'apparition du titre */
-#livret-title-menu {
-    opacity: 0;
-    transition: opacity 1s ease;
-}
-
-#menu {
-    display: none;
-}
-
-/* Ajouter un effet lorsque le menu est activé */
-#menu {
-    display: block;
-    opacity: 1;
-}
-
-/* 12. Styliser le footer */
-footer {
-    background-color: #f8f9fa;  /* Couleur de fond claire */
-    color: #2a3d6b;  /* Couleur bleue élégante */
-    font-family: 'Lora', serif;  /* Police élégante */
-    font-size: 1.2em;  /* Taille du texte */
-    text-align: center;  /* Centrer le texte */
-    padding: 20px;  /* Ajouter un peu d'espace autour du texte */
-    position: fixed;  /* Fixer le footer en bas de la page */
-    bottom: 0;  /* Placer le footer tout en bas */
-    width: 100%;  /* Prendre toute la largeur de la page */
-    box-sizing: border-box;  /* Assurer que le padding ne dépasse pas la largeur */
-    z-index: 5;  /* Positionner le footer derrière le bouton "Retour" */
-}
-
-footer p {
-    margin: 0;  /* Enlever la marge par défaut autour du paragraphe */
-}
-
-/* Styliser les boutons "Table des matières" et "Table des abréviations" */
-#table-of-contents, #abbreviations {
-    background-color: #003366;  /* Bleu marine foncé */
-    color: white;
-    font-size: 24px;  /* Augmenter la taille du texte */
-    padding: 20px 40px;
-    border: none;
-    border-radius: 10px;
-    width: 100%;  /* Placer chaque bouton sur une nouvelle ligne */
-    margin: 15px 0;  /* Espacement entre les boutons */
-    cursor: pointer;
-    text-align: center; /* Centrer le texte */
-    display: block; /* Forcer chaque bouton à prendre toute la largeur */
-}
-
-#table-of-contents:hover, #abbreviations:hover {
-    background-color: #002244;  /* Couleur bleue plus foncée au survol */
-    transition: background-color 0.3s ease;  /* Animation douce au survol */
-}
-
-/* Ajouter un petit effet d'ombre au texte pour le rendre plus visible */
-#table-of-contents, #abbreviations {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
-}
-
-/* Ajouter une animation de survol aux boutons */
-#table-of-contents:hover, #abbreviations:hover {
-    transform: scale(1.05);  /* Légère augmentation de la taille au survol */
-}
-
-/* Appliquer un peu de marge autour de la section des boutons pour les espacer du reste du contenu */
-#table-of-contents, #abbreviations {
-    margin-top: 30px;  /* Ajouter un espacement au-dessus */
-}
-
-/* PDF Viewer */
-#pdfViewer {
-    width: 100vw;      /* largeur maximale de l'écran */
-    height: 100vh;     /* hauteur maximale de l'écran */
-    overflow: auto;    /* permettre le scroll */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #f0f0f0;
-    box-sizing: border-box;
-}
-
-/* iframe contenant le PDF */
-#pdfViewer iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    transform-origin: top left; /* pour zoom centré en haut à gauche */
-}
-
-#menu {
-    text-align: center;
-    margin-top: 0;          /* supprimer l'espace au-dessus */
-    padding-top: 10px;      /* petit padding si nécessaire */
-}
-
-#image-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 0;          /* supprimer l'espace inutile */
-    padding: 0;
-}
-
-#table-of-contents, #abbreviations {
-    margin-top: 10px;       /* léger espacement */
-}
-
