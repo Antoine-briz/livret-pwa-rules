@@ -20,12 +20,18 @@ function renderHome() {
     const welcomeMessage = document.createElement("h2");
     welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
 
+ const menuImage = document.createElement("img");
+    menuImage.src = "img/titre.png";  // Chemin de l'image
+    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
+    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
+
     const description = document.createElement("p");
     description.textContent = "Cliquez sur l'image pour continuer.";
 
     // Ajouter le contenu dans le conteneur #app
     appContainer.appendChild(welcomeMessage);
     appContainer.appendChild(description);
+    appContainer.appendChild(menuImage);
 }
 
 // 2. Déclaration de la fonction openPDF
