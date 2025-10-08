@@ -331,3 +331,21 @@ footer p {
     transform-origin: top left; /* pour zoom centré en haut à gauche */
 }
 
+#menu {
+    text-align: center;
+    margin-top: 0;          /* supprimer l'espace au-dessus */
+    padding-top: 10px;      /* petit padding si nécessaire */
+}
+
+#image-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;          /* supprimer l'espace inutile */
+    padding: 0;
+}
+
+#table-of-contents, #abbreviations {
+    margin-top: 10px;       /* léger espacement */
+}
+
