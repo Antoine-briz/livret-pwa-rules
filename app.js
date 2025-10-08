@@ -133,7 +133,7 @@ function renderPage(pageNum) {
         }
 
         // Augmenter le facteur de zoom pour une meilleure résolution
-        const scale = 1.5;  // Vous pouvez essayer de l'augmenter à 2 ou plus si nécessaire
+        const scale = 0,9;  // Vous pouvez essayer de l'augmenter à 2 ou plus si nécessaire
         const viewport = page.getViewport({ scale: scale });
 
         // Redimensionner le canvas en fonction du zoom
