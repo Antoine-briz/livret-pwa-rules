@@ -252,3 +252,77 @@
     transform: scale(1.05); /* Légère augmentation de la taille au survol */
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
 }
+
+
+/* Style pour les boutons de navigation (Précédent / Suivant) */
+.pdf-nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;  /* Espacement entre les boutons */
+  margin: 20px 0;
+}
+
+.pdf-nav button {
+  padding: 10px 20px;
+  background-color: #4CAF50;  /* Couleur de fond */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.pdf-nav button:hover {
+  background-color: #45a049;  /* Couleur de fond au survol */
+}
+
+#pdfViewer {
+  display: flex; /* Utilisation de flexbox pour un meilleur alignement */
+  justify-content: flex-start; /* Aligner à gauche */
+  align-items: flex-start; /* Aligner en haut */
+  margin: 0; /* Retirer les marges par défaut */
+  padding: 0; /* Retirer les paddings */
+  width: 100%; /* S'assurer que l'élément occupe toute la largeur disponible */
+}
+
+#pdfViewer canvas {
+  margin: 0; /* Retirer toute marge autour du canvas */
+  padding: 0; /* Retirer les paddings */
+  display: block; /* Bloquer le canvas pour qu'il s'étire */
+}
+
+/* Ajouter un conteneur pour le PDF avec des barres de défilement */
+#pdfViewer {
+  width: 100%;
+  height: 80vh; /* Hauteur du PDF */
+  overflow: auto; /* Active la barre de défilement si nécessaire */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-start; /* Aligner le PDF à gauche */
+  background-color: #f1f1f1; /* Optionnel, juste pour le fond */
+}
+
+#pdfViewer canvas {
+  margin: 0;  /* Supprime les marges autour du canvas */
+  display: block;  /* Assure que le canvas occupe toute la largeur */
+}
+
+/* Style du bouton Retour */
+#pdfViewer button {
+  width: 50%; 
+  margin: 10px 0;
+  padding: 8px 16px;  /* Bouton plus petit */
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;  /* Taille de police réduite */
+}
+
+#pdfViewer button:hover {
+  background-color: #e64a19;
+}
+
