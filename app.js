@@ -135,7 +135,7 @@ function renderPage(pageNum) {
         // Augmenter le facteur de zoom pour une meilleure résolution
         const scale = 0.75;  // Facteur de zoom (maintenu identique à l'original)
         const dpi = window.devicePixelRatio || 1;  // Densité de pixels de l'écran (affiche en haute résolution)
-        const viewport = page.getViewport({ scale: scale });
+        const viewport = page.getViewport({ scale: 0.75 }); 
 
         // Ajuster la taille du canvas en fonction de la densité de pixels
         canvas.height = viewport.height * dpi;
