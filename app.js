@@ -53,6 +53,9 @@ export function openPDF(pdfPath) {
     // Désactiver l'utilisation du worker dans pdf.js
     pdfjsLib.disableWorker = true;
 
+    // Ajouter un log pour vérifier l'URL du PDF
+    console.log("Tentative de chargement du PDF : ", pdfPath);
+
     // Modifier l'URL pour refléter l'ouverture du PDF
     const pdfName = pdfPath.split("/").pop().split(".")[0];  // Exemple : "antibiorein" pour antibiotique rénal
     history.pushState(null, '', `#/${pdfName}`);
@@ -96,24 +99,14 @@ export function openPDF(pdfPath) {
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
 
-    // Charger le PDF sans utiliser de worker
+    // Charger le PDF avec pdf.js
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
 
-    // Créer un iframe pour afficher le PDF
-    const iframe = document.createElement("iframe");
-    iframe.src = pdfUrl;
-    iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
-    iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
-    iframe.style.border = "none";  // Enlever les bordures
-
-    // Ajouter l'iframe à l'élément #pdfViewer
-    pdfViewer.appendChild(iframe);
-
+    // Utiliser pdf.js pour charger le PDF
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         
-        // Appliquer le zoom via PDF.js : utiliser la largeur de l'écran pour déterminer le zoom
         const scale = window.innerWidth < 768 ? 0.55 : 0.7;  // Zoom plus faible sur les petits écrans
         renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
     }).catch((error) => {
@@ -121,7 +114,7 @@ export function openPDF(pdfPath) {
     });
 }
 
-
+// Fonction pour afficher une page spécifique avec le bon zoom
 function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
 
@@ -136,9 +129,6 @@ function renderPage(pageNum, scale = 1) {
         const context = canvas.getContext('2d');
 
         // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
-        const scale = 1.5;  // Zoom fixe qui garde une bonne qualité de lecture
-
-        // Ajuster la taille du canvas en fonction du zoom
         const viewport = page.getViewport({ scale: scale });
 
         canvas.height = viewport.height;
@@ -155,6 +145,7 @@ function renderPage(pageNum, scale = 1) {
 function goToPage(pageNum) {
     renderPage(pageNum);
 }
+
 
 // 5. Fonction pour remplir le menu avec les liens vers les PDFs
 function populateMenu() {
