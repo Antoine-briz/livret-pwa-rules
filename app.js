@@ -98,3 +98,95 @@ export function openPDF(pdfPath) {
     console.log("URL complète du PDF : ", pdfUrl);
 
     // Charger le document PDF avec pdf.js et récupérer la première page
+    pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        renderPage(currentPage);  // Appeler la fonction renderPage pour afficher la première page
+    }).catch((error) => {
+        console.error("Erreur lors du chargement du PDF :", error);
+    });
+}
+
+// Fonction pour rendre la page actuelle
+function renderPage(pageNum) {
+    const viewer = document.getElementById('pdfViewer');
+
+    // Vérifier les limites des pages
+    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
+
+    pdfDoc.getPage(pageNum).then(page => {
+        const canvas = document.createElement('canvas');
+        viewer.innerHTML = '';  // Réinitialiser la vue avant d'ajouter une nouvelle page
+        viewer.appendChild(canvas);
+
+        const context = canvas.getContext('2d');
+        const viewport = page.getViewport({ scale: 0.75 });  // Appliquer un zoom pour le PDF
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        // Rendu de la page sur le canvas
+        page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+            currentPage = pageNum;
+        });
+    });
+}
+
+// Fonction pour aller à une page spécifique
+function goToPage(pageNum) {
+    renderPage(pageNum);
+}
+
+// 5. Fonction pour remplir le menu avec les liens vers les PDFs
+function populateMenu() {
+    const imgList = [
+        { name: 'Echographie pratique', pdf: 'echographie.pdf', image: 'echographie.png' },
+        { name: 'Ventilation mécanique', pdf: 'ventilation.pdf', image: 'ventilation.png' },
+        { name: 'Bactériologie clinique', pdf: 'bacterio.pdf', image: 'bacterio.png' },
+        { name: 'Epuration extra-rénale', pdf: 'dialyse.pdf', image: 'dialyse.png' },
+        { name: 'EEG continu', pdf: 'eeg.pdf', image: 'eeg.png' },
+        { name: 'Maladies de système', pdf: 'systeme.pdf', image: 'systeme.png' },
+        { name: 'Médicaments et posologies', pdf: 'medicaments.pdf', image: 'medicaments.png' }
+    ];
+
+    const imgContainer = document.getElementById('image-list');
+    imgContainer.innerHTML = '';  // Effacer tout le contenu précédent
+
+    imgList.forEach(item => {
+        // Créer un élément div pour chaque image et son titre
+        let imgDiv = document.createElement('div');
+        imgDiv.classList.add('image-container');
+
+        // Créer l'élément image
+        let imgElement = document.createElement('img');
+        imgElement.src = 'img/' + item.image;
+        imgElement.alt = item.name;
+        imgElement.classList.add('image-item');
+
+        // Ajouter l'image et le titre à l'élément div
+        imgDiv.appendChild(imgElement);
+
+        // Ajouter un événement pour ouvrir le PDF lorsque l'image est cliquée
+        imgDiv.addEventListener('click', () => openPDF(item.pdf));
+
+        // Ajouter l'élément div au conteneur du menu
+        imgContainer.appendChild(imgDiv);
+    });
+  
+    // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
+    document.getElementById("table-of-contents").addEventListener("click", function() {
+        openPDF("tablemetiere.pdf");  // Ouvrir le PDF des tables des matières
+    });
+
+    document.getElementById("abbreviations").addEventListener("click", function() {
+        openPDF("tableabrev.pdf");  // Ouvrir le PDF des tables des abréviations
+    });
+}
+
+// 6. Fonction pour monter le contenu en fonction du hash dans l'URL
+function mount() {
+    const route = routes[location.hash] || renderHome;  // fallback si hash non défini
+    route(); // affiche la page correspondante
+}
+
+// 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
+window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
+window.addEventListener("load", mount);  // Met à jour la page au chargement de la page
