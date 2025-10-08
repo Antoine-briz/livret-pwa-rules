@@ -111,7 +111,7 @@ export function openPDF(pdfPath) {
     iframe.style.border = "none";  // Enlever les bordures
 
     // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
-    iframe.style.transform = "scale(0.6)";  // Ajuste le zoom si nécessaire
+    iframe.style.transform = "scale(0.5)";  // Ajuste le zoom si nécessaire
     iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
 
     // Permettre le défilement horizontal si nécessaire
