@@ -1,3 +1,5 @@
+import * as pdfjsLib from 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
+
 let currentPage = 1;  // Page actuelle
 let pdfDoc = null;    // Référence au document PDF
 
