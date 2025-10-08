@@ -303,3 +303,14 @@
 #pdfViewer button:hover {
   background-color: #e64a19;
 }
+
+.btn.ghost {
+  background: transparent;
+  border: 2px solid #4169be; /* Bordure bleue */
+  color: #4169be; /* Texte bleu */
+}
+
+.btn.ghost:hover {
+  background-color: #4169be; /* Fond bleu au survol */
+  color: white; /* Texte blanc au survol */
+}
