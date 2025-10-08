@@ -92,9 +92,6 @@ export function openPDF(pdfPath) {
 
     appContainer.appendChild(backButton);
 
-    // Ajouter le bouton "Retour" en dessous des autres boutons
-    appContainer.appendChild(backButton);
-
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
