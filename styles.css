@@ -324,3 +324,12 @@ footer p {
 #table-of-contents, #abbreviations {
     margin-top: 10px;       /* léger espacement */
 }
+
+/* 1. Styliser l'image du titre */
+#livret-title-menu img {
+    width: 100%;  /* L'image occupe toute la largeur du conteneur */
+    height: auto;  /* Maintient l'aspect de l'image */
+    margin-top: 20px;  /* Espacement au-dessus de l'image */
+    margin-bottom: 10px;  /* Espacement en dessous de l'image */
+}
+
