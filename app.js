@@ -50,9 +50,6 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
-    // Désactiver l'utilisation du worker dans pdf.js
-    pdfjsLib.disableWorker = true;
-
     // Ajouter un log pour vérifier l'URL du PDF
     console.log("Tentative de chargement du PDF : ", pdfPath);
 
@@ -79,12 +76,16 @@ export function openPDF(pdfPath) {
     appContainer.appendChild(navContainer);
 
     // Créer un bouton "Retour" pour revenir au menu principal
-      const backButton = document.createElement("button");
-  backButton.textContent = "Retour";
-  backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
-  backButton.addEventListener("click", () => {
-    window.location.hash = "#/"; // Redirige vers le menu principal
-  });
+    const backButton = document.createElement("button");
+    backButton.textContent = "Retour";
+    backButton.classList.add("btn");
+
+    // Ajouter un événement "click" au bouton
+    backButton.addEventListener("click", () => {
+        console.log("Le bouton 'Retour' a été cliqué.");
+        window.location.hash = "#/"; // change le hash
+        mount(); // force le rendu du menu principal
+    });
 
     appContainer.appendChild(backButton);
 
@@ -92,35 +93,21 @@ export function openPDF(pdfPath) {
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
 
-    // Charger le PDF sans utiliser de worker
+    // Charger le PDF avec PDF.js
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
 
-    // Créer un iframe pour afficher le PDF
-    const iframe = document.createElement("iframe");
-iframe.src = pdfUrl;
-iframe.style.width = "100%"; // Ajuste la largeur pour occuper tout l'espace disponible
-iframe.style.height = "100vh"; // Hauteur ajustée pour toute la hauteur de l'écran
-iframe.style.border = "none";  // Enlève les bordures
-iframe.style.transform = "scale(0.75)";  // Dézoome légèrement pour s'adapter à l'écran
-iframe.style.transformOrigin = "top left"; // Assure que le zoom se centre sur le coin supérieur gauche
-iframe.style.overflow = "auto"; // Permet le défilement horizontal et vertical si nécessaire
-
-
-    // Ajouter l'iframe à l'élément #pdfViewer
-    pdfViewer.appendChild(iframe);
-
+    // Charger le document PDF avec pdf.js et récupérer la première page
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-
-        const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
-        renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
+        renderPage(currentPage);  // Appeler la fonction renderPage pour afficher la première page
     }).catch((error) => {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
 
-function renderPage(pageNum, scale = 1) {
+// Fonction pour rendre la page actuelle
+function renderPage(pageNum) {
     const viewer = document.getElementById('pdfViewer');
 
     // Vérifier les limites des pages
@@ -128,14 +115,11 @@ function renderPage(pageNum, scale = 1) {
 
     pdfDoc.getPage(pageNum).then(page => {
         const canvas = document.createElement('canvas');
-        viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
+        viewer.innerHTML = '';  // Réinitialiser la vue avant d'ajouter une nouvelle page
         viewer.appendChild(canvas);
 
         const context = canvas.getContext('2d');
-
-        // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
-        const viewport = page.getViewport({ scale: scale });
-
+        const viewport = page.getViewport({ scale: 0.75 });  // Appliquer un zoom pour le PDF
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
@@ -146,11 +130,10 @@ function renderPage(pageNum, scale = 1) {
     });
 }
 
-// 4. Fonction pour aller à une page spécifique
+// Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
     renderPage(pageNum);
 }
-
 
 // 5. Fonction pour remplir le menu avec les liens vers les PDFs
 function populateMenu() {
