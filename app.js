@@ -1,15 +1,6 @@
 let currentPage = 1;  // Page actuelle
 let pdfDoc = null;    // Référence au document PDF
 
-// Routes de l'application
-const routes = {
-    "#/": renderHome, // La route pour la page d'accueil
-    "#/menu": renderMenu, // La route pour le menu
-    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
-    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
-    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
-};
-
 function renderMenu() {
     const appContainer = document.getElementById("app");
 
@@ -46,6 +37,17 @@ function renderMenu() {
     appContainer.appendChild(menuTitle);
     appContainer.appendChild(menuList);
 }
+
+// Routes de l'application
+const routes = {
+    "#/": renderHome, // La route pour la page d'accueil
+    "#/menu": renderMenu, // La route pour le menu
+    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
+    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
+    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
+};
+
+
 
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
