@@ -99,22 +99,37 @@ export function openPDF(pdfPath) {
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
 
-    // Charger le PDF avec pdf.js
+    // Charger le PDF sans utiliser de worker
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
 
-    // Utiliser pdf.js pour charger le PDF
+    // Créer un iframe pour afficher le PDF
+    const iframe = document.createElement("iframe");
+    iframe.src = pdfUrl;
+    iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
+    iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
+    iframe.style.border = "none";  // Enlever les bordures
+
+    // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
+    iframe.style.transform = "scale(0.75)";  // Ajuste le zoom si nécessaire
+    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
+
+    // Permettre le défilement horizontal et vertical si nécessaire
+    iframe.style.overflow = "auto"; // Permet le défilement horizontal et vertical
+
+    // Ajouter l'iframe à l'élément #pdfViewer
+    pdfViewer.appendChild(iframe);
+
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-        
-        const scale = window.innerWidth < 768 ? 0.55 : 0.7;  // Zoom plus faible sur les petits écrans
+
+        const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
         renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
     }).catch((error) => {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
 
-// Fonction pour afficher une page spécifique avec le bon zoom
 function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
 
