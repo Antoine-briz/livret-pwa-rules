@@ -98,6 +98,15 @@ appContainer.appendChild(backButton);
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
 
+const iframe = document.createElement("iframe");
+    iframe.src = pdfUrl;
+    iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
+    iframe.style.height = "100%"; // Ajuster la hauteur pour occuper tout l'espace
+    iframe.style.transform = "scale(0.8)";  // Ajuster le zoom si nécessaire
+    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
+    iframe.style.border = "none";  // Enlever les bordures
+    pdfViewer.appendChild(iframe);
+    
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         renderPage(currentPage);  // Afficher la première page du PDF
