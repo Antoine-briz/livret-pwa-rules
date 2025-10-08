@@ -168,6 +168,7 @@
 }
 
 /* 7. PDF Viewer */
+/* 7. PDF Viewer */
 #pdfViewer {
     width: 100vw;      /* largeur maximale de l'écran */
     height: 100vh;     /* hauteur maximale de l'écran */
@@ -181,24 +182,24 @@
     box-sizing: border-box;
 }
 
-/* 10. Mettre en forme le conteneur du PDF (iframe) */
+/* iframe contenant le PDF */
 #pdfViewer iframe {
     width: 100%;         /* La largeur de l'iframe prend toute la largeur disponible */
     height: 100%;        /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
     border: none;        /* Enlever la bordure de l'iframe */
     transform-origin: top left;  /* Pour zoom centré en haut à gauche */
     transform: scale(0.75);  /* Dézoome légèrement pour s'adapter au petit écran */
-    /* Permettre le défilement horizontal et vertical */
-    overflow: auto;
-    min-width: 100%;      /* S'assurer que l'iframe occupe toute la largeur */
-    min-height: 100%;     /* S'assurer que l'iframe occupe toute la hauteur */
+    overflow: auto;        /* Permet le défilement horizontal et vertical */
 }
 
+/* 8. Ajouter un dézoom supplémentaire pour les petits écrans (smartphone) */
 @media screen and (max-width: 768px) {
     #pdfViewer iframe {
-        transform: scale(0.7);  /* Zoom plus faible pour les petits écrans */
+        transform: scale(0.65);  /* Zoom plus faible pour les petits écrans */
     }
 }
+
+
 
 #menu {
     text-align: center;
