@@ -286,26 +286,20 @@
   display: block;  /* Assure que le canvas occupe toute la largeur */
 }
 
-
-/* Style du bouton Retour - Modifié pour correspondre à atb-pwa */
-#pdfViewer .btn {
-  width: 100%;                /* Prend toute la largeur disponible */
-  margin-top: 20px;           /* Espacement entre le PDF et le bouton */
-  padding: 16px;              /* Taille du bouton */
-  background-color: #4169be;  /* Couleur de fond bleu */
-  color: white;               /* Texte blanc */
-  border: none;               /* Retirer la bordure */
-  border-radius: 5px;         /* Bords arrondis */
-  cursor: pointer;           /* Curseur pointer pour indiquer que c'est cliquable */
-  font-weight: bold;          /* Texte en gras */
-  font-size: 16px;            /* Taille du texte */
-  text-align: center;         /* Centrer le texte */
-  display: block;             /* Permet de rendre le bouton en bloc (occupant toute la largeur) */
-  box-sizing: border-box;     /* Pour éviter que le padding ne dépasse */
+/* Style du bouton Retour */
+#pdfViewer button {
+  width: 50%; 
+  margin: 10px 0;
+  padding: 8px 16px;  /* Bouton plus petit */
+  background-color: #ff5722;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;  /* Taille de police réduite */
 }
 
-/* Effet de survol du bouton */
-#pdfViewer .btn:hover {
-  background-color: #365f9a;  /* Couleur de fond plus sombre au survol */
+#pdfViewer button:hover {
+  background-color: #e64a19;
 }
-
