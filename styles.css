@@ -118,41 +118,25 @@
 
 /* 7. PDF Viewer */
 #pdfViewer {
-    overflow-y: auto;
-    max-height: 80vh; /* Limiter la hauteur du PDF */
-    margin-top: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-}
-
-#pdfViewer {
+    width: 100vw;      /* largeur maximale de l'écran */
+    height: 100vh;     /* hauteur maximale de l'écran */
+    overflow: auto;    /* permettre le scroll */
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 90vh;  /* Ajuste la hauteur pour laisser de l'espace pour les boutons */
-    overflow: hidden;
+    align-items: flex-start;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
 }
 
-.pdf-nav {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.pdf-nav button {
-    padding: 10px 20px;
-    font-size: 16px;
-}
-
-#app {
-    margin-top: 20px;
-    text-align: center;
-}
-
-body {
-    font-family: 'Calibri', sans-serif; /* Police élégante pour tout le texte */
+/* iframe contenant le PDF */
+#pdfViewer iframe {
+    width: 100%;         /* La largeur de l'iframe prendra toute la largeur disponible */
+    height: 100%;        /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
+    border: none;        /* Enlever la bordure de l'iframe */
+    transform-origin: top left;  /* Pour zoom centré en haut à gauche */
+    transform: scale(0.8);  /* Dézoome légèrement pour s'adapter au petit écran */
 }
 
 /* 8. Styliser les images de section dans le menu */
@@ -204,107 +188,12 @@ body {
 }
 
 /* 10. Mettre en forme le conteneur du PDF (iframe) */
-
-#pdfViewer {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;  /* Aligner le PDF en haut pour permettre le défilement */
-    height: 90vh;  /* Ajuster la hauteur de l'iframe à 90% de la fenêtre */
-    width: 100%;   /* Prendre toute la largeur disponible */
-    overflow: auto;  /* Permettre le défilement */
-    background-color: #f0f0f0;
-    border: 2px solid #ccc;
-    margin-top: 20px;
-}
-
-iframe {
-    width: 100%;     /* La largeur de l'iframe prendra toute la largeur disponible */
-    height: 100%;    /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
-    border: none;    /* Enlever la bordure de l'iframe */
-}
-
-
-/* 11. Appliquer la police élégante pour le titre */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&family=Lora:wght@700&display=swap');
-
-#livret-title, #livret-title-menu {
-    display: none; /* Supprimer totalement le titre */
-}
-
-/* 12. Styliser le footer */
-footer {
-    background-color: #f8f9fa;  /* Couleur de fond claire */
-    color: #2a3d6b;  /* Couleur bleue élégante */
-    font-family: 'Lora', serif;  /* Police élégante */
-    font-size: 1.2em;  /* Taille du texte */
-    text-align: center;  /* Centrer le texte */
-    padding: 20px;  /* Ajouter un peu d'espace autour du texte */
-    position: fixed;  /* Fixer le footer en bas de la page */
-    bottom: 0;  /* Placer le footer tout en bas */
-    width: 100%;  /* Prendre toute la largeur de la page */
-    box-sizing: border-box;  /* Assurer que le padding ne dépasse pas la largeur */
-    z-index: 5;  /* Positionner le footer derrière le bouton "Retour" */
-}
-
-footer p {
-    margin: 0;  /* Enlever la marge par défaut autour du paragraphe */
-}
-
-/* Styliser les boutons "Table des matières" et "Table des abréviations" */
-#table-of-contents, #abbreviations {
-    background-color: #003366;  /* Bleu marine foncé */
-    color: white;
-    font-size: 24px;  /* Augmenter la taille du texte */
-    padding: 20px 40px;
-    border: none;
-    border-radius: 10px;
-    width: 100%;  /* Placer chaque bouton sur une nouvelle ligne */
-    margin: 15px 0;  /* Espacement entre les boutons */
-    cursor: pointer;
-    text-align: center; /* Centrer le texte */
-    display: block; /* Forcer chaque bouton à prendre toute la largeur */
-}
-
-#table-of-contents:hover, #abbreviations:hover {
-    background-color: #002244;  /* Couleur bleue plus foncée au survol */
-    transition: background-color 0.3s ease;  /* Animation douce au survol */
-}
-
-/* Ajouter un petit effet d'ombre au texte pour le rendre plus visible */
-#table-of-contents, #abbreviations {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
-}
-
-/* Ajouter une animation de survol aux boutons */
-#table-of-contents:hover, #abbreviations:hover {
-    transform: scale(1.05);  /* Légère augmentation de la taille au survol */
-}
-
-/* Appliquer un peu de marge autour de la section des boutons pour les espacer du reste du contenu */
-#table-of-contents, #abbreviations {
-    margin-top: 10px;  /* Réduire l'espacement pour les mettre en haut */
-}
-
-/* PDF Viewer */
-#pdfViewer {
-    width: 100vw;      /* largeur maximale de l'écran */
-    height: 100vh;     /* hauteur maximale de l'écran */
-    overflow: auto;    /* permettre le scroll */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #f0f0f0;
-    box-sizing: border-box;
-}
-
-/* iframe contenant le PDF */
 #pdfViewer iframe {
     width: 100%;
     height: 100%;
     border: none;
     transform-origin: top left; /* pour zoom centré en haut à gauche */
+    transform: scale(0.8);  /* Dézoome légèrement pour s'adapter au petit écran */
 }
 
 #menu {
@@ -325,7 +214,7 @@ footer p {
     margin-top: 10px;       /* léger espacement */
 }
 
-/* 1. Styliser l'image du titre */
+/* 1. Styliser l'image du titre dans le menu */
 #livret-title-menu img {
     width: 100%;  /* L'image occupe toute la largeur du conteneur */
     height: auto;  /* Maintient l'aspect de l'image */
@@ -349,74 +238,4 @@ footer p {
 #livret-title-menu:hover {
     transform: scale(1.05); /* Légère augmentation de la taille au survol */
     box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
-}
-
-/* 3. Ajouter un fond de couleur claire derrière l'image pour la mettre en valeur */
-#menu {
-    background-color: #f7f7f7; /* Fond clair pour le menu */
-    padding: 20px 0;            /* Ajouter un peu d'espace au-dessus et en dessous */
-    border-radius: 10px;        /* Ajouter un bord arrondi au menu */
-    text-align: center;         /* Centrer tout le contenu du menu */
-}
-
-/* 4. Ajuster les marges et espacement des autres éléments du menu */
-#image-list {
-    margin-top: 10px;           /* Ajuster la marge au-dessus des images dans le menu */
-    padding: 0;                 /* Retirer tout padding pour une meilleure présentation */
-}
-
-/* 5. Styliser les boutons "Table des matières" et "Table des abréviations" pour qu'ils soient bien visibles */
-#table-of-contents, #abbreviations {
-    background-color: #003366;  /* Bleu marine foncé */
-    color: white;
-    font-size: 24px;            /* Augmenter la taille du texte */
-    padding: 20px 40px;
-    border: none;
-    border-radius: 10px;
-    width: 100%;                /* Placer chaque bouton sur une nouvelle ligne */
-    margin: 15px 0;             /* Espacement entre les boutons */
-    cursor: pointer;
-    text-align: center;         /* Centrer le texte */
-    display: block;             /* Forcer chaque bouton à prendre toute la largeur */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour les boutons */
-}
-
-#table-of-contents:hover, #abbreviations:hover {
-    background-color: #002244;  /* Couleur bleue plus foncée au survol */
-    transition: background-color 0.3s ease;  /* Animation douce au survol */
-}
-
-#table-of-contents, #abbreviations {
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
-}
-
-/* 7. Ajuster la taille de l'iframe contenant le PDF */
-#pdfViewer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;        /* Largeur maximale de l'écran */
-    height: 100vh;       /* Hauteur maximale de l'écran */
-    margin: 0;
-    padding: 0;
-     overflow-x: auto;    /* Permet le défilement horizontal si nécessaire */
-    overflow-y: auto;    /* Empêcher le défilement dans la vue */
-    background-color: #f0f0f0;
-    box-sizing: border-box;
-}
-
-/* 8. Assurer que l'iframe du PDF occupe toute la taille de l'écran sans déformation */
-#pdfViewer iframe {
-    width: 100%;         /* La largeur de l'iframe prendra toute la largeur disponible */
-    height: 100%;        /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
-    border: none;        /* Enlever la bordure de l'iframe */
-    transform-origin: top left;  /* Centre le zoom sur le coin supérieur gauche */
-    transform: scale(0.7);  /* Dézoome légèrement pour s'adapter au petit écran */
-}
-
-/* 9. Réduire légèrement le zoom pour mobile et tablette */
-@media screen and (max-width: 768px) {
-    #pdfViewer iframe {
-        transform: scale(0.65);  /* Dézoome encore un peu plus pour les petits écrans */
-    }
 }
