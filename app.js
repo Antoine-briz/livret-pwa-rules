@@ -73,20 +73,19 @@ export function openPDF(pdfPath) {
     appContainer.appendChild(navContainer);
 
     // Créer un bouton "Retour" pour revenir au menu principal
-const backButton = document.createElement("button");
-backButton.textContent = "Retour";
-backButton.classList.add("btn");
+    const backButton = document.createElement("button");
+    backButton.textContent = "Retour";
+    backButton.classList.add("btn");
 
-// Ajouter un événement "click" au bouton
-backButton.addEventListener("click", () => {
-    console.log("Le bouton 'Retour' a été cliqué.");
-    console.log("L'URL actuelle est : ", window.location.href);
-    location.replace('#/');  // Essayer location.replace
-    console.log("Redirection vers l'URL : ", window.location.href);
-});
+    // Ajouter un événement "click" au bouton
+    backButton.addEventListener("click", () => {
+        console.log("Le bouton 'Retour' a été cliqué.");
+        window.location.hash = "#/"; // change le hash
+        mount(); // force le rendu du menu principal
+    });
 
-appContainer.appendChild(backButton);
-    
+    appContainer.appendChild(backButton);
+
     // Ajouter le bouton "Retour" en dessous des autres boutons
     appContainer.appendChild(backButton);
 
@@ -98,15 +97,16 @@ appContainer.appendChild(backButton);
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
 
-const iframe = document.createElement("iframe");
+    // Créer un iframe pour afficher le PDF
+    const iframe = document.createElement("iframe");
     iframe.src = pdfUrl;
     iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
-    iframe.style.height = "100%"; // Ajuster la hauteur pour occuper tout l'espace
+    iframe.style.height = "80vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
     iframe.style.transform = "scale(0.8)";  // Ajuster le zoom si nécessaire
     iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
     iframe.style.border = "none";  // Enlever les bordures
     pdfViewer.appendChild(iframe);
-    
+
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         renderPage(currentPage);  // Afficher la première page du PDF
@@ -114,7 +114,6 @@ const iframe = document.createElement("iframe");
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
-
 
 function renderPage(pageNum) {
     const viewer = document.getElementById('pdfViewer');
@@ -144,8 +143,6 @@ function renderPage(pageNum) {
         });
     });
 }
-
-
 
 // 4. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
@@ -178,10 +175,8 @@ function populateMenu() {
         imgElement.alt = item.name;
         imgElement.classList.add('image-item');
 
-
         // Ajouter l'image et le titre à l'élément div
         imgDiv.appendChild(imgElement);
-       
 
         // Ajouter un événement pour ouvrir le PDF lorsque l'image est cliquée
         imgDiv.addEventListener('click', () => openPDF(item.pdf));
@@ -189,7 +184,8 @@ function populateMenu() {
         // Ajouter l'élément div au conteneur du menu
         imgContainer.appendChild(imgDiv);
     });
-  // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
+  
+    // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
     document.getElementById("table-of-contents").addEventListener("click", function() {
         openPDF("tablemetiere.pdf");  // Ouvrir le PDF des tables des matières
     });
@@ -197,4 +193,45 @@ function populateMenu() {
     document.getElementById("abbreviations").addEventListener("click", function() {
         openPDF("tableabrev.pdf");  // Ouvrir le PDF des tables des abréviations
     });
+}
+
+// 6. Fonction pour monter le contenu en fonction du hash dans l'URL
+function mount() {
+    const route = routes[location.hash] || renderHome; // fallback si hash non défini
+    route(); // affiche la page correspondante
+}
+
+// Routes de l'application
+const routes = {
+    "#/": renderHome, // La route pour la page d'accueil
+    "#/menu": renderMenu, // La route pour le menu
+    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
+    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
+    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
+};
+
+// 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
+window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
+window.addEventListener("load", mount);  // Met à jour la page au chargement de la page
+
+// Fonction de renderHome pour afficher la page d'accueil
+function renderHome() {
+    const appContainer = document.getElementById("app");
+    appContainer.innerHTML = `
+        <h2>Bienvenue dans le livret PWA</h2>
+        <p>Choisissez un PDF à afficher :</p>
+        <button onclick="window.location.hash = '#/menu'">Menu</button>
+    `;
+}
+
+// Fonction pour afficher le menu avec les PDF disponibles
+function renderMenu() {
+    const appContainer = document.getElementById("app");
+    appContainer.innerHTML = `
+        <h2>Menu</h2>
+        <button onclick="window.location.hash = '#/echographie'">Echographie</button>
+        <button onclick="window.location.hash = '#/ventilation'">Ventilation</button>
+        <button onclick="window.location.hash = '#/bacterio'">Bactériologie</button>
+        <button onclick="window.location.hash = '#/dialyse'">Dialyse</button>
+    `;
 }
