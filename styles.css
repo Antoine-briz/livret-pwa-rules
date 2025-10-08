@@ -390,3 +390,32 @@ footer p {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
 }
 
+/* 7. Ajuster la taille de l'iframe contenant le PDF */
+#pdfViewer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;        /* Largeur maximale de l'écran */
+    height: 100vh;       /* Hauteur maximale de l'écran */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;    /* Empêcher le défilement dans la vue */
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+}
+
+/* 8. Assurer que l'iframe du PDF occupe toute la taille de l'écran sans déformation */
+#pdfViewer iframe {
+    width: 100%;         /* La largeur de l'iframe prendra toute la largeur disponible */
+    height: 100%;        /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
+    border: none;        /* Enlever la bordure de l'iframe */
+    transform-origin: top left;  /* Centre le zoom sur le coin supérieur gauche */
+    transform: scale(0.9);  /* Dézoome légèrement pour s'adapter au petit écran */
+}
+
+/* 9. Réduire légèrement le zoom pour mobile et tablette */
+@media screen and (max-width: 768px) {
+    #pdfViewer iframe {
+        transform: scale(0.75);  /* Dézoome encore un peu plus pour les petits écrans */
+    }
+}
