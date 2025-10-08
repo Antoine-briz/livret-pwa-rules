@@ -309,4 +309,25 @@ footer p {
     margin-top: 30px;  /* Ajouter un espacement au-dessus */
 }
 
+/* PDF Viewer */
+#pdfViewer {
+    width: 100vw;      /* largeur maximale de l'écran */
+    height: 100vh;     /* hauteur maximale de l'écran */
+    overflow: auto;    /* permettre le scroll */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+}
+
+/* iframe contenant le PDF */
+#pdfViewer iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transform-origin: top left; /* pour zoom centré en haut à gauche */
+}
 
