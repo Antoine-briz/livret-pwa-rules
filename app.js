@@ -102,17 +102,14 @@ export function openPDF(pdfPath) {
 
     // Créer un iframe pour afficher le PDF
     const iframe = document.createElement("iframe");
-    iframe.src = pdfUrl;
-    iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
-    iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
-    iframe.style.border = "none";  // Enlever les bordures
+iframe.src = pdfUrl;
+iframe.style.width = "100%"; // Ajuste la largeur pour occuper tout l'espace disponible
+iframe.style.height = "100vh"; // Hauteur ajustée pour toute la hauteur de l'écran
+iframe.style.border = "none";  // Enlève les bordures
+iframe.style.transform = "scale(0.75)";  // Dézoome légèrement pour s'adapter à l'écran
+iframe.style.transformOrigin = "top left"; // Assure que le zoom se centre sur le coin supérieur gauche
+iframe.style.overflow = "auto"; // Permet le défilement horizontal et vertical si nécessaire
 
-    // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
-    iframe.style.transform = "scale(0.75)";  // Ajuste le zoom si nécessaire
-    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
-
-    // Permettre le défilement horizontal et vertical si nécessaire
-    iframe.style.overflow = "auto"; // Permet le défilement horizontal et vertical
 
     // Ajouter l'iframe à l'élément #pdfViewer
     pdfViewer.appendChild(iframe);
