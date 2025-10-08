@@ -333,3 +333,60 @@ footer p {
     margin-bottom: 10px;  /* Espacement en dessous de l'image */
 }
 
+/* 1. Styliser l'image du titre dans le menu */
+#livret-title-menu {
+    width: 100%;            /* Occupation de toute la largeur disponible */
+    max-width: 800px;       /* Limiter la largeur maximale pour éviter l'extension sur des écrans larges */
+    height: auto;           /* Conserver les proportions */
+    margin: 0 auto 20px auto; /* Centrer l'image horizontalement et ajouter un espacement en bas */
+    display: block;         /* S'assurer que l'image est un bloc pour pouvoir centrer */
+    border-radius: 15px;    /* Ajouter un léger arrondi pour l'effet esthétique */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Ajouter une ombre portée pour un effet de profondeur */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajouter une transition douce */
+}
+
+/* 2. Ajouter un léger effet de zoom au survol */
+#livret-title-menu:hover {
+    transform: scale(1.05); /* Légère augmentation de la taille au survol */
+    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+}
+
+/* 3. Ajouter un fond de couleur claire derrière l'image pour la mettre en valeur */
+#menu {
+    background-color: #f7f7f7; /* Fond clair pour le menu */
+    padding: 20px 0;            /* Ajouter un peu d'espace au-dessus et en dessous */
+    border-radius: 10px;        /* Ajouter un bord arrondi au menu */
+    text-align: center;         /* Centrer tout le contenu du menu */
+}
+
+/* 4. Ajuster les marges et espacement des autres éléments du menu */
+#image-list {
+    margin-top: 10px;           /* Ajuster la marge au-dessus des images dans le menu */
+    padding: 0;                 /* Retirer tout padding pour une meilleure présentation */
+}
+
+/* 5. Styliser les boutons "Table des matières" et "Table des abréviations" pour qu'ils soient bien visibles */
+#table-of-contents, #abbreviations {
+    background-color: #003366;  /* Bleu marine foncé */
+    color: white;
+    font-size: 24px;            /* Augmenter la taille du texte */
+    padding: 20px 40px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;                /* Placer chaque bouton sur une nouvelle ligne */
+    margin: 15px 0;             /* Espacement entre les boutons */
+    cursor: pointer;
+    text-align: center;         /* Centrer le texte */
+    display: block;             /* Forcer chaque bouton à prendre toute la largeur */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère pour les boutons */
+}
+
+#table-of-contents:hover, #abbreviations:hover {
+    background-color: #002244;  /* Couleur bleue plus foncée au survol */
+    transition: background-color 0.3s ease;  /* Animation douce au survol */
+}
+
+#table-of-contents, #abbreviations {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);  /* Ombre portée pour un effet plus élégant */
+}
+
