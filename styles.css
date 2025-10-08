@@ -48,43 +48,27 @@
 
 /* 4. Styliser les boutons de navigation pour les PDF */
 .pdf-nav {
-    display: flex;
-    justify-content: center; /* Centrer les boutons de navigation */
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;  /* Espacement entre les boutons */
+  margin: 20px 0;
 }
 
 .pdf-nav button {
-    padding: 10px 20px;
-    background-color: #00bcd4;
-    color: white;
-    border: none;
-    cursor: pointer;
+  padding: 10px 20px;
+  background-color: #4CAF50;  /* Couleur de fond */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .pdf-nav button:hover {
-    background-color: #0097a7;
+  background-color: #45a049;  /* Couleur de fond au survol */
 }
 
-/* 5. Bouton "Retour" */
-.btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #f44336;
-    color: white;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    z-index: 10; /* Mettre un z-index plus élevé que le footer pour qu'il soit visible au-dessus */
-    display: block;
-    width: 200px; /* Largeur du bouton */
-    margin-left: auto; /* Centrer horizontalement */
-    margin-right: auto;
-    margin-bottom: 20px; /* Ajouter une marge pour que le bouton ne soit pas trop collé à l'iframe */
-}
 
-.btn:hover {
-    background-color: #e53935;
-}
 
 #app {
     margin-bottom: 80px;  /* Ajouter de la marge en bas pour ne pas être recouvert par le footer */
@@ -191,6 +175,28 @@
     transform-origin: top left;  /* Pour zoom centré en haut à gauche */
     transform: scale(0.75);  /* Dézoome légèrement pour s'adapter au petit écran */
     overflow: auto;        /* Permet le défilement horizontal et vertical */
+}
+
+/* Style du bouton Retour */
+#pdfViewer .btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff5722;  /* Couleur de fond orange */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;  /* Taille de police réduite */
+  width: 50%;  /* Centrer le bouton horizontalement */
+  margin-left: auto;
+  margin-right: auto;
+  display: block;  /* S'assurer que le bouton est un bloc */
+}
+
+/* Effet au survol */
+#pdfViewer .btn:hover {
+  background-color: #e64a19;  /* Couleur de fond plus sombre au survol */
 }
 
 
