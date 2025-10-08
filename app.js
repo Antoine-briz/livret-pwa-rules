@@ -62,7 +62,7 @@ export function openPDF(pdfPath) {
 
     console.log('Current URL:', window.location.href);
 
-    // Créer les boutons de navigation pour le PDF
+    // Créer les boutons de navigation pour les PDF
     const navContainer = document.createElement("div");
     navContainer.classList.add("pdf-nav");
 
@@ -114,6 +114,9 @@ export function openPDF(pdfPath) {
     iframe.style.transform = "scale(0.6)";  // Ajuste le zoom si nécessaire
     iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
 
+    // Permettre le défilement horizontal si nécessaire
+    iframe.style.overflow = "auto"; // Permet le défilement
+
     // Ajouter l'iframe à l'élément #pdfViewer
     pdfViewer.appendChild(iframe);
 
@@ -126,6 +129,7 @@ export function openPDF(pdfPath) {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
+
 
 function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
