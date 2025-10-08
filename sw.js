@@ -18,6 +18,7 @@ const FILES_TO_CACHE = [
     '/img/eeg.png',
     '/img/systeme.png',
     '/img/medicaments.png',
+  '/img/titre.png',
   '/pdf/echographie.pdf',
   '/pdf/ventilation.pdf',
   '/pdf/bacterio.pdf',
