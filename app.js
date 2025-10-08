@@ -126,8 +126,8 @@ function renderPage(pageNum) {
         viewer.innerHTML = '';  // Réinitialiser la vue avant d'ajouter une nouvelle page
         viewer.appendChild(canvas);
 
-        const context = canvas.getContext('2d');
-        const viewport = page.getViewport({ scale: 0.75 });  // Appliquer un zoom pour le PDF
+        const scale = 1.5;  // Vous pouvez essayer de l'augmenter à 2 ou plus si nécessaire
+        const viewport = page.getViewport({ scale: scale });
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
