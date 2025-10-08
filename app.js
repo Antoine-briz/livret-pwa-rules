@@ -127,15 +127,27 @@ function renderPage(pageNum) {
         viewer.appendChild(canvas);
 
         const context = canvas.getContext('2d');
+        if (!context) {
+            console.error("Impossible de récupérer le contexte du canvas.");
+            return;
+        }
+
+        // Augmenter le facteur de zoom pour une meilleure résolution
         const scale = 1.5;  // Vous pouvez essayer de l'augmenter à 2 ou plus si nécessaire
         const viewport = page.getViewport({ scale: scale });
+
+        // Redimensionner le canvas en fonction du zoom
         canvas.height = viewport.height;
         canvas.width = viewport.width;
 
         // Rendu de la page sur le canvas
         page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
             currentPage = pageNum;
+        }).catch((err) => {
+            console.error("Erreur lors du rendu de la page : ", err);
         });
+    }).catch((err) => {
+        console.error("Erreur lors de la récupération de la page PDF : ", err);
     });
 }
 
