@@ -133,14 +133,18 @@ function renderPage(pageNum) {
         }
 
         // Augmenter le facteur de zoom pour une meilleure résolution
-        const scale = 0,9;  // Vous pouvez essayer de l'augmenter à 2 ou plus si nécessaire
+        const scale = 0.75;  // Facteur de zoom (maintenu identique à l'original)
+        const dpi = window.devicePixelRatio || 1;  // Densité de pixels de l'écran (affiche en haute résolution)
         const viewport = page.getViewport({ scale: scale });
 
-        // Redimensionner le canvas en fonction du zoom
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+        // Ajuster la taille du canvas en fonction de la densité de pixels
+        canvas.height = viewport.height * dpi;
+        canvas.width = viewport.width * dpi;
 
-        // Rendu de la page sur le canvas
+        // Modifier le contexte du canvas pour utiliser la densité de pixels plus élevée
+        context.setTransform(dpi, 0, 0, dpi, 0, 0);
+
+        // Rendu de la page sur le canvas avec la densité de pixels plus élevée
         page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
             currentPage = pageNum;
         }).catch((err) => {
