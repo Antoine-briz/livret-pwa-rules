@@ -399,7 +399,8 @@ footer p {
     height: 100vh;       /* Hauteur maximale de l'écran */
     margin: 0;
     padding: 0;
-    overflow: hidden;    /* Empêcher le défilement dans la vue */
+     overflow-x: auto;    /* Permet le défilement horizontal si nécessaire */
+    overflow-y: auto;    /* Empêcher le défilement dans la vue */
     background-color: #f0f0f0;
     box-sizing: border-box;
 }
@@ -410,12 +411,12 @@ footer p {
     height: 100%;        /* La hauteur de l'iframe s'adapte à la hauteur du conteneur */
     border: none;        /* Enlever la bordure de l'iframe */
     transform-origin: top left;  /* Centre le zoom sur le coin supérieur gauche */
-    transform: scale(0.9);  /* Dézoome légèrement pour s'adapter au petit écran */
+    transform: scale(0.7);  /* Dézoome légèrement pour s'adapter au petit écran */
 }
 
 /* 9. Réduire légèrement le zoom pour mobile et tablette */
 @media screen and (max-width: 768px) {
     #pdfViewer iframe {
-        transform: scale(0.75);  /* Dézoome encore un peu plus pour les petits écrans */
+        transform: scale(0.65);  /* Dézoome encore un peu plus pour les petits écrans */
     }
 }
