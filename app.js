@@ -77,14 +77,16 @@ export function openPDF(pdfPath) {
 
     // Créer un bouton "Retour" pour revenir au menu principal
     const backButton = document.createElement("button");
-    backButton.type = "button";  // Définir le type du bouton
-    backButton.classList.add("btn", "ghost");  // Ajouter les classes "btn" et "ghost"
-    backButton.textContent = "← Retour";  // Ajouter le texte et la flèche
-    backButton.onclick = function() {
-        history.back();  // Utiliser history.back() pour revenir à la page précédente
-    };
-    
-    appContainer.appendChild(backButton);
+backButton.type = "button";  // Définir le type du bouton
+backButton.classList.add("btn", "ghost");  // Ajouter les classes "btn" et "ghost"
+backButton.textContent = "← Retour";  // Ajouter le texte et la flèche
+backButton.onclick = function() {
+    // Changer le hash pour revenir à la page principale
+    window.location.hash = "#/";  // Redirige vers la page principale
+    mount(); // Forcer le rendu de la page d'accueil
+};
+
+appContainer.appendChild(backButton);
 
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
