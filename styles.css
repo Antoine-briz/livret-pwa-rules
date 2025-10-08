@@ -169,6 +169,7 @@
 
 /* 7. PDF Viewer */
 /* 7. PDF Viewer */
+/* 7. PDF Viewer */
 #pdfViewer {
     width: 100vw;      /* largeur maximale de l'écran */
     height: 100vh;     /* hauteur maximale de l'écran */
@@ -191,6 +192,7 @@
     transform: scale(0.75);  /* Dézoome légèrement pour s'adapter au petit écran */
     overflow: auto;        /* Permet le défilement horizontal et vertical */
 }
+
 
 /* 8. Ajouter un dézoom supplémentaire pour les petits écrans (smartphone) */
 @media screen and (max-width: 768px) {
