@@ -10,6 +10,43 @@ const routes = {
     "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
 };
 
+function renderMenu() {
+    const appContainer = document.getElementById("app");
+
+    // Effacer le contenu existant
+    appContainer.innerHTML = "";
+
+    // Créer le contenu du menu
+    const menuTitle = document.createElement("h2");
+    menuTitle.textContent = "Menu des PDF";
+
+    // Liste des options de menu
+    const menuList = document.createElement("ul");
+
+    const items = [
+        { name: 'Echographie', link: '#/echographie' },
+        { name: 'Ventilation', link: '#/ventilation' },
+        { name: 'Bactériologie', link: '#/bacterio' }
+    ];
+
+    items.forEach(item => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = item.link;
+        link.textContent = item.name;
+        link.addEventListener("click", (event) => {
+            event.preventDefault();  // Empêcher le rechargement de la page
+            window.location.hash = item.link.substring(1); // Mise à jour de l'URL
+            mount();  // Appeler mount pour mettre à jour la page
+        });
+        listItem.appendChild(link);
+        menuList.appendChild(listItem);
+    });
+
+    appContainer.appendChild(menuTitle);
+    appContainer.appendChild(menuList);
+}
+
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
     const appContainer = document.getElementById("app");
