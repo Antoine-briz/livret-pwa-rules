@@ -1,44 +1,15 @@
+
 let currentPage = 1;  // Page actuelle
 let pdfDoc = null;    // Référence au document PDF
 
-function renderMenu() {
-    const appContainer = document.getElementById("app");
+// Gestion du clic sur l'image "couverture" pour afficher le menu
+document.getElementById('cover-img').addEventListener('click', function() {
+    document.querySelector('.welcome-page').style.display = 'none';  // Cacher la page d'accueil
+    document.getElementById('menu').style.display = 'block';  // Afficher le menu
+    document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
+    populateMenu();  // Remplir le menu avec les liens des PDF
+});
 
-    // Effacer le contenu existant
-    appContainer.innerHTML = "";
-
-    // Créer le contenu du menu
-    const menuTitle = document.createElement("h2");
-    menuTitle.textContent = "Menu des PDF";
-
-    // Liste des options de menu
-    const menuList = document.createElement("ul");
-
-    const items = [
-        { name: 'Echographie', link: '#/echographie' },
-        { name: 'Ventilation', link: '#/ventilation' },
-        { name: 'Bactériologie', link: '#/bacterio' }
-    ];
-
-    items.forEach(item => {
-        const listItem = document.createElement("li");
-        const link = document.createElement("a");
-        link.href = item.link;
-        link.textContent = item.name;
-        link.addEventListener("click", (event) => {
-            event.preventDefault();  // Empêcher le rechargement de la page
-            window.location.hash = item.link.substring(1); // Mise à jour de l'URL
-            mount();  // Appeler mount pour mettre à jour la page
-        });
-        listItem.appendChild(link);
-        menuList.appendChild(listItem);
-    });
-
-    appContainer.appendChild(menuTitle);
-    appContainer.appendChild(menuList);
-}
-
-// Routes de l'application
 const routes = {
     "#/": renderHome, // La route pour la page d'accueil
     "#/menu": renderMenu, // La route pour le menu
@@ -46,8 +17,6 @@ const routes = {
     "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
     "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
 };
-
-
 
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
@@ -60,7 +29,7 @@ function renderHome() {
     const welcomeMessage = document.createElement("h2");
     welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
 
-    const menuImage = document.createElement("img");
+ const menuImage = document.createElement("img");
     menuImage.src = "img/titre.png";  // Chemin de l'image
     menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
     menuImage.style.width = "100%";  // Ajuster la largeur de l'image
@@ -117,16 +86,16 @@ export function openPDF(pdfPath) {
 
     // Créer un bouton "Retour" pour revenir au menu principal
     const backButton = document.createElement("button");
-    backButton.type = "button";  // Définir le type du bouton
-    backButton.classList.add("btn", "ghost");  // Ajouter les classes "btn" et "ghost"
-    backButton.textContent = "← Retour";  // Ajouter le texte et la flèche
-    backButton.onclick = function() {
-        // Changer le hash pour revenir à la page principale
-        window.location.hash = "#/";  // Redirige vers la page principale
-        mount(); // Forcer le rendu de la page d'accueil
-    };
+backButton.type = "button";  // Définir le type du bouton
+backButton.classList.add("btn", "ghost");  // Ajouter les classes "btn" et "ghost"
+backButton.textContent = "← Retour";  // Ajouter le texte et la flèche
+backButton.onclick = function() {
+    // Changer le hash pour revenir à la page principale
+    window.location.hash = "#/";  // Redirige vers la page principale
+    mount(); // Forcer le rendu de la page d'accueil
+};
 
-    appContainer.appendChild(backButton);
+appContainer.appendChild(backButton);
 
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
@@ -222,10 +191,14 @@ function populateMenu() {
 
 // 6. Fonction pour monter le contenu en fonction du hash dans l'URL
 function mount() {
-    const route = routes[location.hash] || renderHome;  // fallback si hash non défini
+    const route = routes[location.hash] || renderHome; // fallback si hash non défini
     route(); // affiche la page correspondante
 }
+
+// Routes de l'application
+
 
 // 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
 window.addEventListener("load", mount);  // Met à jour la page au chargement de la page
+
