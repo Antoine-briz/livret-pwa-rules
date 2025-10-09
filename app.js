@@ -6,18 +6,20 @@ document.getElementById('cover-img').addEventListener('click', function() {
     const book = document.querySelector('.book');
 
     // Appliquer l'animation d'ouverture du livre
-    book.classList.add('opened');  // Ajoute la classe pour faire l'animation d'ouverture
+    book.classList.add('opened');  // Ajoute la classe pour l'animation
 
-    // Masquer la page d'accueil et afficher le menu après un délai
+    // Retirer l'image de couverture du DOM après l'animation
+    setTimeout(function() {
+        document.getElementById('cover-img').remove(); // Supprimer l'image du DOM
+    }, 2000); // La suppression de l'image intervient après l'animation
+
+    // Masquer la page d'accueil et afficher le menu après l'animation
     setTimeout(function() {
         document.querySelector('.welcome-page').style.display = 'none';  // Cacher la page d'accueil
         document.getElementById('menu').style.display = 'block';  // Afficher le menu
         document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
         populateMenu();  // Remplir le menu avec les liens des PDF
-
-        // Retirer l'image "couverture" si elle est présente dans le menu
-        document.getElementById('cover-img').style.display = 'none';  // Masquer l'image couverture dans le menu
-    }, 2000);  // Le délai correspond au temps de l'animation d'ouverture du livre (1 seconde)
+    }, 2000);  // Délai pour afficher le menu
 });
 
 
