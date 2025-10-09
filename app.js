@@ -240,3 +240,12 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.ready.then(function(registration) {
+    // Forcer la mise à jour du service worker dès que la page est chargée
+    registration.update();  // Forcer la mise à jour
+  }).catch((error) => {
+    console.log('Erreur lors de la mise à jour du Service Worker:', error);
+  });
+}
