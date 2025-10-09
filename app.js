@@ -9,6 +9,17 @@ document.getElementById('cover-img').addEventListener('click', function() {
     populateMenu();  // Remplir le menu avec les liens des PDF
 });
 
+// Valeur initiale du zoom
+let currentZoom = 0.9;
+
+function changeZoom(delta) {
+    // Ajuste le facteur de zoom
+    currentZoom = Math.max(0.5, Math.min(2, currentZoom + delta));  // Garde le zoom entre 0.5 et 2
+
+    console.log("Zoom actuel : ", currentZoom);
+    renderPage(currentPage, currentZoom); // Re-render la page avec le nouveau zoom
+}
+
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
     const appContainer = document.getElementById("app");
@@ -90,20 +101,33 @@ export function openPDF(pdfPath) {
 
     appContainer.appendChild(backButton);
 
-const zoomContainer = document.createElement("div");
-    zoomContainer.classList.add("zoom-controls");
+// Créer un conteneur pour les boutons de zoom en bas à droite
+const zoomContainer = document.createElement('div');
+zoomContainer.id = "zoom-buttons";
+zoomContainer.style.position = "absolute";
+zoomContainer.style.bottom = "20px";  // Espacement du bas
+zoomContainer.style.right = "20px";   // Espacement à droite
+zoomContainer.style.zIndex = "999";   // Pour s'assurer que les boutons sont visibles au-dessus du contenu PDF
 
-    const zoomInButton = document.createElement("button");
-    zoomInButton.textContent = "Zoom +";
-    zoomInButton.addEventListener("click", () => changeZoom(0.1));
+// Créer le bouton Zoom +
+const zoomInButton = document.createElement('button');
+zoomInButton.textContent = "+";
+zoomInButton.style.fontSize = "24px";  // Taille du texte pour le bouton +
+zoomInButton.addEventListener("click", () => changeZoom(0.1));  // Augmenter le zoom
 
-    const zoomOutButton = document.createElement("button");
-    zoomOutButton.textContent = "Zoom -";
-    zoomOutButton.addEventListener("click", () => changeZoom(-0.1));
+// Créer le bouton Zoom -
+const zoomOutButton = document.createElement('button');
+zoomOutButton.textContent = "-";
+zoomOutButton.style.fontSize = "24px";  // Taille du texte pour le bouton -
+zoomOutButton.addEventListener("click", () => changeZoom(-0.1)); // Diminuer le zoom
 
-    zoomContainer.appendChild(zoomInButton);
-    zoomContainer.appendChild(zoomOutButton);
-    appContainer.appendChild(zoomContainer);
+// Ajouter les boutons dans le conteneur
+zoomContainer.appendChild(zoomInButton);
+zoomContainer.appendChild(zoomOutButton);
+
+// Ajouter le conteneur des boutons de zoom dans le document
+document.getElementById('pdfViewer').appendChild(zoomContainer);
+
     
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
@@ -296,14 +320,4 @@ if ('serviceWorker' in navigator) {
 
 // Votre code existant...
 
-// Valeur initiale du zoom
-let currentZoom = 0.9;
-
-function changeZoom(delta) {
-    // Ajuste le facteur de zoom
-    currentZoom = Math.max(0.5, Math.min(2, currentZoom + delta));  // Garde le zoom entre 0.5 et 2
-
-    console.log("Zoom actuel : ", currentZoom);
-    renderPage(currentPage, currentZoom); // Re-render la page avec le nouveau zoom
-}
 
