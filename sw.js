@@ -57,17 +57,18 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Récupération des fichiers à partir du cache (mode hors ligne)
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
+        console.log("Ressource récupérée depuis le cache:", event.request.url);
         return cachedResponse;  // Si la ressource est dans le cache, la renvoyer
       }
-      console.log("Ressource récupérée via réseau:", event.request.url);
+      console.log("Ressource récupérée via le réseau:", event.request.url);
       return fetch(event.request);  // Sinon, faire une requête réseau
     })
   );
 });
-
 
 
