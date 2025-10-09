@@ -85,20 +85,6 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
-     if (pdfPath === "systeme.pdf") {
-        const landscapeMessage = document.createElement("div");
-        landscapeMessage.id = "landscape-message";
-        landscapeMessage.textContent = "Tournez votre écran en paysage pour zoomer";
-        landscapeMessage.style.fontSize = "18px";
-        landscapeMessage.style.fontFamily = "Arial, sans-serif";  // Utilisez une police élégante simple
-        landscapeMessage.style.textAlign = "center";  // Centrer le texte
-        landscapeMessage.style.marginBottom = "20px";  // Espacement en bas
-        landscapeMessage.style.color = "#333";  // Couleur sombre pour le texte
-
-        // Ajouter ce message au container, juste sous l'iframe
-        pdfViewer.appendChild(landscapeMessage);
-    }
-
     // Ajouter un log pour vérifier l'URL du PDF
     console.log("Tentative de chargement du PDF : ", pdfPath);
 
