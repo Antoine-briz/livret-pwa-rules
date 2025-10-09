@@ -344,3 +344,30 @@ footer p {
   display: block;     /* Empêche l'espacement sous l'image */
   margin: 0;          /* Enlève les marges par défaut */
 }
+
+/* Applique le fond bleu à l'ensemble de la page */
+body {
+  background-color: #001f3d; /* Bleu marine foncé */
+  color: white; /* Texte blanc */
+}
+
+/* Si vous avez des sections spécifiques comme #app ou .welcome-page, appliquez aussi la même couleur */
+#app {
+  background-color: #001f3d;
+  color: white;
+}
+
+.welcome-page {
+  background-color: #001f3d;
+  color: white;
+}
+
+button {
+  background-color: #004080; /* Bleu plus clair pour les boutons si besoin */
+  color: white;
+}
+
+a {
+  color: #ffffff; /* Liens en blanc */
+}
+
