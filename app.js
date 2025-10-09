@@ -140,6 +140,9 @@ function renderPage(pageNum, scale = 1) {
 
         const context = canvas.getContext('2d');
 
+ const scale = 0.75;                     // Zoom inchangé
+        const dpi = window.devicePixelRatio || 2; /
+        
         // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
         const viewport = page.getViewport({ scale: scale });
 
