@@ -90,6 +90,21 @@ export function openPDF(pdfPath) {
 
     appContainer.appendChild(backButton);
 
+const zoomContainer = document.createElement("div");
+    zoomContainer.classList.add("zoom-controls");
+
+    const zoomInButton = document.createElement("button");
+    zoomInButton.textContent = "Zoom +";
+    zoomInButton.addEventListener("click", () => changeZoom(0.1));
+
+    const zoomOutButton = document.createElement("button");
+    zoomOutButton.textContent = "Zoom -";
+    zoomOutButton.addEventListener("click", () => changeZoom(-0.1));
+
+    zoomContainer.appendChild(zoomInButton);
+    zoomContainer.appendChild(zoomOutButton);
+    appContainer.appendChild(zoomContainer);
+    
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
