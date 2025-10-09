@@ -363,3 +363,11 @@ footer p {
     outline: none;  /* Retirer le contour au focus */
 }
 
+#landscape-message {
+    font-size: 18px;
+    font-family: Arial, sans-serif;  /* Simple et élégant */
+    text-align: center;  /* Centrer le texte */
+    margin-bottom: 20px;  /* Espacement en bas */
+    color: #333;  /* Couleur sombre */
+}
+
