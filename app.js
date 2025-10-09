@@ -1,4 +1,3 @@
-
 let currentPage = 1;  // Page actuelle
 let pdfDoc = null;    // Référence au document PDF
 
@@ -9,14 +8,6 @@ document.getElementById('cover-img').addEventListener('click', function() {
     document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
     populateMenu();  // Remplir le menu avec les liens des PDF
 });
-
-const routes = {
-    "#/": renderHome, // La route pour la page d'accueil
-    "#/menu": renderMenu, // La route pour le menu
-    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
-    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
-    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
-};
 
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
@@ -59,6 +50,9 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
+    // Désactiver l'utilisation du worker dans pdf.js
+    pdfjsLib.disableWorker = true;
+
     // Ajouter un log pour vérifier l'URL du PDF
     console.log("Tentative de chargement du PDF : ", pdfPath);
 
@@ -86,36 +80,54 @@ export function openPDF(pdfPath) {
 
     // Créer un bouton "Retour" pour revenir au menu principal
     const backButton = document.createElement("button");
-backButton.type = "button";  // Définir le type du bouton
-backButton.classList.add("btn", "ghost");  // Ajouter les classes "btn" et "ghost"
-backButton.textContent = "← Retour";  // Ajouter le texte et la flèche
-backButton.onclick = function() {
-    // Changer le hash pour revenir à la page principale
-    window.location.hash = "#/";  // Redirige vers la page principale
-    mount(); // Forcer le rendu de la page d'accueil
-};
+    backButton.textContent = "Retour";
+    backButton.classList.add("btn");
 
-appContainer.appendChild(backButton);
+    // Ajouter un événement "click" au bouton
+    backButton.addEventListener("click", () => {
+        console.log("Le bouton 'Retour' a été cliqué.");
+        window.location.hash = "#/"; // change le hash
+        mount(); // force le rendu du menu principal
+    });
+
+    appContainer.appendChild(backButton);
 
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
 
-    // Charger le PDF avec PDF.js
+    // Charger le PDF sans utiliser de worker
     const pdfUrl = './pdf/' + pdfPath;
     console.log("URL complète du PDF : ", pdfUrl);
 
-    // Charger le document PDF avec pdf.js et récupérer la première page
+    // Créer un iframe pour afficher le PDF
+    const iframe = document.createElement("iframe");
+    iframe.src = pdfUrl;
+    iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
+    iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
+    iframe.style.border = "none";  // Enlever les bordures
+
+    // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
+    iframe.style.transform = "scale(0.75)";  // Ajuste le zoom si nécessaire
+    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
+
+    // Permettre le défilement horizontal et vertical si nécessaire
+    iframe.style.overflow = "auto"; // Permet le défilement horizontal et vertical
+
+    // Ajouter l'iframe à l'élément #pdfViewer
+    pdfViewer.appendChild(iframe);
+
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-        renderPage(currentPage);  // Appeler la fonction renderPage pour afficher la première page
+
+        const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
+        renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
     }).catch((error) => {
         console.error("Erreur lors du chargement du PDF :", error);
     });
 }
 
-// Fonction pour rendre la page actuelle
-function renderPage(pageNum) {
+function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
 
     // Vérifier les limites des pages
@@ -123,42 +135,29 @@ function renderPage(pageNum) {
 
     pdfDoc.getPage(pageNum).then(page => {
         const canvas = document.createElement('canvas');
-        viewer.innerHTML = '';  // Réinitialiser la vue avant d'ajouter une nouvelle page
+        viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
         viewer.appendChild(canvas);
 
         const context = canvas.getContext('2d');
-        if (!context) {
-            console.error("Impossible de récupérer le contexte du canvas.");
-            return;
-        }
 
-        // Augmenter le facteur de zoom pour une meilleure résolution
-        const scale = 0.75;  // Facteur de zoom (maintenu identique à l'original)
-        const dpi = window.devicePixelRatio || 1;  // Densité de pixels de l'écran (affiche en haute résolution)
-        const viewport = page.getViewport({ scale: 0.75 }); 
+        // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
+        const viewport = page.getViewport({ scale: scale });
 
-        // Ajuster la taille du canvas en fonction de la densité de pixels
-        canvas.height = viewport.height * dpi;
-        canvas.width = viewport.width * dpi;
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
 
-        // Modifier le contexte du canvas pour utiliser la densité de pixels plus élevée
-        context.setTransform(dpi, 0, 0, dpi, 0, 0);
-
-        // Rendu de la page sur le canvas avec la densité de pixels plus élevée
+        // Rendu de la page sur le canvas
         page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
             currentPage = pageNum;
-        }).catch((err) => {
-            console.error("Erreur lors du rendu de la page : ", err);
         });
-    }).catch((err) => {
-        console.error("Erreur lors de la récupération de la page PDF : ", err);
     });
 }
 
-// Fonction pour aller à une page spécifique
+// 4. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
     renderPage(pageNum);
 }
+
 
 // 5. Fonction pour remplir le menu avec les liens vers les PDFs
 function populateMenu() {
@@ -213,7 +212,13 @@ function mount() {
 }
 
 // Routes de l'application
-
+const routes = {
+    "#/": renderHome, // La route pour la page d'accueil
+    "#/menu": renderMenu, // La route pour le menu
+    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
+    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
+    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
+};
 
 // 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
