@@ -371,3 +371,26 @@ a {
   color: #ffffff; /* Liens en blanc */
 }
 
+/* Appliquer la couleur bleue marine foncée aux boutons */
+#table-of-contents, #abbreviations {
+  background-color: #001f3d; /* Bleu marine foncé */
+  color: white; /* Texte blanc */
+  border: none; /* Enlever la bordure */
+  padding: 10px 20px; /* Ajouter un peu d'espace autour du texte */
+  font-size: 16px; /* Taille du texte */
+  cursor: pointer; /* Indicateur cliquable */
+  transition: background-color 0.3s ease; /* Transition pour un changement de couleur au survol */
+}
+
+#table-of-contents:hover, #abbreviations:hover {
+  background-color: #004080; /* Bleu plus clair au survol */
+}
+
+/* Appliquer la couleur bleue marine foncée au footer */
+footer {
+  background-color: #001f3d; /* Bleu marine foncé */
+  color: white; /* Texte blanc */
+  padding: 20px; /* Espacement autour du texte */
+  text-align: center; /* Centrer le texte */
+}
+
