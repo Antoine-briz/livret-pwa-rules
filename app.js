@@ -229,23 +229,49 @@ const routes = {
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
 window.addEventListener("load", mount);  // Met à jour la page au chargement de la page
 
+// Ajout manuel des fichiers au cache après l'enregistrement du service worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')  // Enregistre le service worker
+    navigator.serviceWorker.register('/sw.js')  // Assurez-vous que le fichier sw.js est à la racine
       .then((registration) => {
         console.log('Service Worker enregistré avec succès:', registration);
+
+        // Une fois le service worker enregistré, ajoutez les fichiers manuellement au cache
+        if (navigator.serviceWorker.controller) {
+          // Ajouter les fichiers manuellement au cache
+          const filesToAdd = [
+            '/img/couverture.png',
+            '/img/echographie.png',
+            '/img/ventilation.png',
+            '/img/bacterio.png',
+            '/img/dialyse.png',
+            '/img/eeg.png',
+            '/img/systeme.png',
+            '/img/medicaments.png',
+            '/img/titre.png',
+            '/pdf/echographie.pdf',
+            '/pdf/ventilation.pdf',
+            '/pdf/bacterio.pdf',
+            '/pdf/dialyse.pdf',
+            '/pdf/eeg.pdf',
+            '/pdf/systeme.pdf',
+            '/pdf/medicaments.pdf',
+            '/pdf/tablemetiere.pdf',
+            '/pdf/tableabrev.pdf'
+          ];
+
+          // Ouvrir le cache et ajouter les fichiers
+          caches.open('livret-pwa-cache-v1').then((cache) => {
+            cache.addAll(filesToAdd).then(() => {
+              console.log('Fichiers ajoutés manuellement au cache');
+            }).catch((err) => {
+              console.error('Erreur lors de l\'ajout des fichiers au cache:', err);
+            });
+          });
+        }
       })
       .catch((error) => {
         console.log('Échec de l\'enregistrement du Service Worker:', error);
       });
-  });
-}
-
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.ready.then(function(registration) {
-    // Forcer la mise à jour du service worker dès que la page est chargée
-    registration.update();  // Forcer la mise à jour
-  }).catch((error) => {
-    console.log('Erreur lors de la mise à jour du Service Worker:', error);
   });
 }
