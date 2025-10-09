@@ -231,7 +231,7 @@ window.addEventListener("load", mount);  // Met à jour la page au chargement de
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')  // Assurez-vous que le fichier sw.js est à la racine
+    navigator.serviceWorker.register('/sw.js')  // Enregistre le service worker
       .then((registration) => {
         console.log('Service Worker enregistré avec succès:', registration);
       })
