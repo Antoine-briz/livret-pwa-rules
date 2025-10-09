@@ -397,3 +397,25 @@ footer {
 footer p {
   color: white; /* Rendre le texte "Amicalement, Dr Antoine Brizard" blanc */
 }
+
+.welcome-page {
+  display: flex;
+  justify-content: center; /* Centrer horizontalement */
+  align-items: center; /* Centrer verticalement */
+  height: 100vh; /* Prendre toute la hauteur de l'écran */
+  margin-top: 20px; /* Ajouter de l'espace au-dessus de l'image */
+}
+
+#cover-img {
+  max-width: 100%; /* Pour garantir que l'image s'ajuste bien sur différents écrans */
+  height: auto;    /* Maintenir les proportions de l'image */
+}
+
+footer {
+  background-color: #001f3d; /* Bleu marine foncé */
+  color: white; /* Texte blanc */
+  padding: 20px; /* Espacement autour du texte */
+  text-align: center; /* Centrer le texte */
+  border-top: none; /* Assurez-vous qu'il n'y a pas de bordure blanche au-dessus du footer */
+}
+
