@@ -337,3 +337,10 @@ footer p {
     color: #555;  /* Couleur légèrement plus claire */
 }
 
+#livret-title-menu {
+  width: 100%;        /* La largeur de l'image occupe toute la largeur de l'écran */
+  height: auto;       /* La hauteur de l'image est ajustée proportionnellement */
+  object-fit: contain; /* Empêche l'image d'être rognée */
+  display: block;     /* Empêche l'espacement sous l'image */
+  margin: 0;          /* Enlève les marges par défaut */
+}
