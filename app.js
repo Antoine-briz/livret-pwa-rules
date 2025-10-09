@@ -124,7 +124,8 @@ pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
 }).catch((error) => {
     console.error("Erreur lors du chargement du PDF :", error);
 });
-
+}
+    
 function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
 
