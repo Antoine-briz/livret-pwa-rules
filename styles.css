@@ -394,3 +394,6 @@ footer {
   text-align: center; /* Centrer le texte */
 }
 
+footer p {
+  color: white; /* Rendre le texte "Amicalement, Dr Antoine Brizard" blanc */
+}
