@@ -141,13 +141,16 @@ function renderPage(pageNum, scale = 1) {
         const context = canvas.getContext('2d');
 
  const scale = 0.75;                     // Zoom inchangé
-        const dpi = window.devicePixelRatio || 4;
+        const dpi = window.devicePixelRatio || 3;
         
         // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
         const viewport = page.getViewport({ scale: scale });
 
-        canvas.height = viewport.height;
-        canvas.width = viewport.width;
+         canvas.width = viewport.width * dpi;
+    canvas.height = viewport.height * dpi;
+
+    // Appliquer le DPI au contexte pour plus de détails
+    context.setTransform(dpi, 0, 0, dpi, 0, 0);
 
         // Rendu de la page sur le canvas
         page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
