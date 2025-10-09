@@ -1,6 +1,6 @@
 
 {
-    "name": "Livret PWA",
+    "name": "Guide pratique MIR CHV",
     "short_name": "Livret",
     "description": "Application pour accéder à des PDF de médecine intensive.",
     "start_url": "./index.html",
