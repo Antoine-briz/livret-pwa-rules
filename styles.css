@@ -314,3 +314,13 @@
   background-color: #4169be; /* Fond bleu au survol */
   color: white; /* Texte blanc au survol */
 }
+
+#pdfViewer {
+    width: 100%;  /* S'assurer que le pdfViewer prend toute la largeur */
+    height: auto;
+}
+
+#pdfViewer canvas {
+    width: 100% !important;  /* Remplir toute la largeur de l'écran */
+    height: auto !important;  /* Adapter la hauteur en fonction de la largeur */
+}
