@@ -230,3 +230,14 @@ const routes = {
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
 window.addEventListener("load", mount);  // Met à jour la page au chargement de la page
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')  // Assurez-vous que le fichier sw.js est à la racine
+      .then((registration) => {
+        console.log('Service Worker enregistré avec succès:', registration);
+      })
+      .catch((error) => {
+        console.log('Échec de l\'enregistrement du Service Worker:', error);
+      });
+  });
+}
