@@ -63,6 +63,7 @@ self.addEventListener('fetch', (event) => {
       if (cachedResponse) {
         return cachedResponse;  // Si la ressource est dans le cache, la renvoyer
       }
+      console.log("Ressource récupérée via réseau:", event.request.url);
       return fetch(event.request);  // Sinon, faire une requête réseau
     })
   );
