@@ -337,37 +337,3 @@ footer p {
     color: #555;  /* Couleur légèrement plus claire */
 }
 
-#zoom-buttons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-#zoom-buttons button {
-    background-color: #4CAF50;  /* Vert pour les boutons */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#zoom-buttons button:hover {
-    background-color: #45a049;  /* Couleur plus foncée au survol */
-}
-
-#zoom-buttons button:focus {
-    outline: none;  /* Retirer le contour au focus */
-}
-
-#landscape-message {
-    font-size: 18px;
-    font-family: Arial, sans-serif;  /* Simple et élégant */
-    text-align: center;  /* Centrer le texte */
-    margin-bottom: 20px;  /* Espacement en bas */
-    color: #333;  /* Couleur sombre */
-}
-
