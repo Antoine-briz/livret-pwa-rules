@@ -50,8 +50,6 @@ export function openPDF(pdfPath) {
     pdfViewer.id = "pdfViewer";
     appContainer.appendChild(pdfViewer);
 
-    // Désactiver l'utilisation du worker dans pdf.js
-    pdfjsLib.disableWorker = true;
 
     // Ajouter un log pour vérifier l'URL du PDF
     console.log("Tentative de chargement du PDF : ", pdfPath);
@@ -119,7 +117,11 @@ export function openPDF(pdfPath) {
 
     pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-
+        renderPage(1, 0.75);  // Afficher la première page du PDF avec un zoom par défaut
+    }).catch((error) => {
+        console.error("Erreur lors du chargement du PDF :", error);
+    });
+}
         const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
         renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
     }).catch((error) => {
