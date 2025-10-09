@@ -3,26 +3,11 @@ let pdfDoc = null;    // Référence au document PDF
 
 // Gestion du clic sur l'image "couverture" pour afficher le menu
 document.getElementById('cover-img').addEventListener('click', function() {
-    const book = document.querySelector('.book');
-
-    // Appliquer l'animation d'ouverture du livre
-    book.classList.add('opened');  // Ajoute la classe pour l'animation
-
-    // Retirer l'image de couverture du DOM après l'animation
-    setTimeout(function() {
-        document.getElementById('cover-img').remove(); // Supprimer l'image du DOM
-    }, 2000); // La suppression de l'image intervient après l'animation
-
-    // Masquer la page d'accueil et afficher le menu après l'animation
-    setTimeout(function() {
-        document.querySelector('.welcome-page').style.display = 'none';  // Cacher la page d'accueil
-        document.getElementById('menu').style.display = 'block';  // Afficher le menu
-        document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
-        populateMenu();  // Remplir le menu avec les liens des PDF
-    }, 2000);  // Délai pour afficher le menu
+    document.querySelector('.welcome-page').style.display = 'none';  // Cacher la page d'accueil
+    document.getElementById('menu').style.display = 'block';  // Afficher le menu
+    document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
+    populateMenu();  // Remplir le menu avec les liens des PDF
 });
-
-
 
 function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
