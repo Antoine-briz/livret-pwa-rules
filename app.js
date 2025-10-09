@@ -17,7 +17,7 @@ document.getElementById('cover-img').addEventListener('click', function() {
 
         // Retirer l'image "couverture" si elle est présente dans le menu
         document.getElementById('cover-img').style.display = 'none';  // Masquer l'image couverture dans le menu
-    }, 1000);  // Le délai correspond au temps de l'animation d'ouverture du livre (1 seconde)
+    }, 2000);  // Le délai correspond au temps de l'animation d'ouverture du livre (1 seconde)
 });
 
 
