@@ -67,12 +67,22 @@ self.addEventListener('fetch', (event) => {
 
       console.log("Ressource récupérée via le réseau:", event.request.url);
       return fetch(event.request).catch(() => {
-        // Si la ressource n'est pas disponible en ligne, afficher une page de secours
+        // Si la ressource n'est pas disponible en ligne, servir depuis le cache
+        // Nous devons vérifier si le fichier demandé est un PDF et s'il est dans le cache
         if (event.request.url.includes(".pdf")) {
-          return caches.match('/offline.pdf');  // Assurez-vous de créer un fichier offline.pdf si nécessaire
+          return caches.match(event.request);  // Servir le PDF depuis le cache
         }
-        return caches.match('/offline.html');  // Page HTML de secours
+        return caches.match('/offline.html');  // Page HTML de secours si aucune ressource n'est disponible
       });
+    })
+  );
+});
+
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('Mise en cache des fichiers', FILES_TO_CACHE);  // Vérification des fichiers en cache
+      return cache.addAll(FILES_TO_CACHE);
     })
   );
 });
