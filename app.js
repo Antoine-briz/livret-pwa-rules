@@ -9,6 +9,40 @@ document.getElementById('cover-img').addEventListener('click', function() {
     populateMenu();  // Remplir le menu avec les liens des PDF
 });
 
+function renderPage(pageNum, scale = 1) {
+    const viewer = document.getElementById('pdfViewer');
+
+    // Vérifier les limites des pages
+    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
+
+    pdfDoc.getPage(pageNum).then(page => {
+        const canvas = document.createElement('canvas');
+        viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
+        viewer.appendChild(canvas);
+
+        const context = canvas.getContext('2d');
+
+        // Utiliser la valeur dynamique de scale pour le zoom
+        // Nous maintenons scale à la valeur du zoom actuel
+        const dpi = window.devicePixelRatio || 3;
+
+        // Calculer l'échelle pour une taille lisible mais optimale
+        const viewport = page.getViewport({ scale: scale });
+
+        canvas.width = viewport.width * dpi;
+        canvas.height = viewport.height * dpi;
+
+        // Appliquer le DPI au contexte pour plus de détails
+        context.setTransform(dpi, 0, 0, dpi, 0, 0);
+
+        // Rendu de la page sur le canvas
+        page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+            currentPage = pageNum;
+        });
+    });
+}
+
+
 // Valeur initiale du zoom
 let currentZoom = 0.9;
 
@@ -163,39 +197,6 @@ pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
 }).catch((error) => {
     console.error("Erreur lors du chargement du PDF :", error);
 });
-}
-    
-function renderPage(pageNum, scale = 1) {
-    const viewer = document.getElementById('pdfViewer');
-
-    // Vérifier les limites des pages
-    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
-
-    pdfDoc.getPage(pageNum).then(page => {
-        const canvas = document.createElement('canvas');
-        viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
-        viewer.appendChild(canvas);
-
-        const context = canvas.getContext('2d');
-
-        // Utiliser la valeur dynamique de scale pour le zoom
-        // Nous maintenons scale à la valeur du zoom actuel
-        const dpi = window.devicePixelRatio || 3;
-
-        // Calculer l'échelle pour une taille lisible mais optimale
-        const viewport = page.getViewport({ scale: scale });
-
-        canvas.width = viewport.width * dpi;
-        canvas.height = viewport.height * dpi;
-
-        // Appliquer le DPI au contexte pour plus de détails
-        context.setTransform(dpi, 0, 0, dpi, 0, 0);
-
-        // Rendu de la page sur le canvas
-        page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
-            currentPage = pageNum;
-        });
-    });
 }
 
 
