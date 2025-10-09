@@ -324,3 +324,22 @@
     width: 100% !important;  /* Remplir toute la largeur de l'écran */
     height: auto !important;  /* Adapter la hauteur en fonction de la largeur */
 }
+
+/* Style du footer */
+footer {
+    font-family: 'Verdana', 'Arial', sans-serif;  /* Utilisation de la police Verdana */
+    font-size: 16px;  /* Taille de police agréable */
+    font-weight: 500;  /* Poids de police plus léger */
+    color: #333;  /* Couleur du texte */
+    text-align: center;  /* Centrer le texte */
+    margin-top: 20px;  /* Un peu d'espace au-dessus */
+    padding: 10px;  /* Un peu d'espace autour du texte */
+    background-color: #f8f8f8;  /* Fond léger */
+    border-top: 1px solid #ddd;  /* Ligne de séparation subtile */
+}
+
+footer p {
+    font-style: italic;  /* Mettre le texte en italique */
+    color: #555;  /* Couleur légèrement plus claire */
+}
+
