@@ -116,6 +116,7 @@ export function openPDF(pdfPath) {
     pdfViewer.appendChild(iframe);
 
     // Correctement gérer les promesses avec `then` et `catch`
+// Correctement gérer les promesses avec `then` et `catch`
 pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;  // Initialiser pdfDoc avec le document PDF
     const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
@@ -123,13 +124,6 @@ pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
 }).catch((error) => {
     console.error("Erreur lors du chargement du PDF :", error);
 });
-
-        const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
-        renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
-    }).catch((error) => {
-        console.error("Erreur lors du chargement du PDF :", error);
-    });
-}
 
 function renderPage(pageNum, scale = 1) {
     const viewer = document.getElementById('pdfViewer');
