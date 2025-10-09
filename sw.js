@@ -57,7 +57,6 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Récupération des fichiers à partir du cache (mode hors ligne)
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
@@ -65,10 +64,15 @@ self.addEventListener('fetch', (event) => {
         console.log("Ressource récupérée depuis le cache:", event.request.url);
         return cachedResponse;  // Si la ressource est dans le cache, la renvoyer
       }
+
       console.log("Ressource récupérée via le réseau:", event.request.url);
-      return fetch(event.request);  // Sinon, faire une requête réseau
+      return fetch(event.request).catch(() => {
+        // Si la ressource n'est pas disponible en ligne, afficher une page de secours
+        if (event.request.url.includes(".pdf")) {
+          return caches.match('/offline.pdf');  // Assurez-vous de créer un fichier offline.pdf si nécessaire
+        }
+        return caches.match('/offline.html');  // Page HTML de secours
+      });
     })
   );
 });
-
-
