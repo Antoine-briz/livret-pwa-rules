@@ -57,11 +57,13 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Récupération des fichiers à partir du cache (hors ligne)
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request);
+      if (cachedResponse) {
+        return cachedResponse;  // Si la ressource est dans le cache, la renvoyer
+      }
+      return fetch(event.request);  // Sinon, faire une requête réseau
     })
   );
 });
