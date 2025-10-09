@@ -154,17 +154,18 @@ function renderPage(pageNum, scale = 1) {
 
         const context = canvas.getContext('2d');
 
- const scale = 0.75;                     // Zoom inchangé
+        // Utiliser la valeur dynamique de scale pour le zoom
+        // Nous maintenons scale à la valeur du zoom actuel
         const dpi = window.devicePixelRatio || 3;
-        
-        // Calculer l'échelle pour une taille lisible mais optimale (ajuster manuellement si nécessaire)
+
+        // Calculer l'échelle pour une taille lisible mais optimale
         const viewport = page.getViewport({ scale: scale });
 
-         canvas.width = viewport.width * dpi;
-    canvas.height = viewport.height * dpi;
+        canvas.width = viewport.width * dpi;
+        canvas.height = viewport.height * dpi;
 
-    // Appliquer le DPI au contexte pour plus de détails
-    context.setTransform(dpi, 0, 0, dpi, 0, 0);
+        // Appliquer le DPI au contexte pour plus de détails
+        context.setTransform(dpi, 0, 0, dpi, 0, 0);
 
         // Rendu de la page sur le canvas
         page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
@@ -172,6 +173,7 @@ function renderPage(pageNum, scale = 1) {
         });
     });
 }
+
 
 // 4. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
@@ -291,3 +293,17 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
+// Votre code existant...
+
+// Valeur initiale du zoom
+let currentZoom = 0.9;
+
+function changeZoom(delta) {
+    // Ajuste le facteur de zoom
+    currentZoom = Math.max(0.5, Math.min(2, currentZoom + delta));  // Garde le zoom entre 0.5 et 2
+
+    console.log("Zoom actuel : ", currentZoom);
+    renderPage(currentPage, currentZoom); // Re-render la page avec le nouveau zoom
+}
+
