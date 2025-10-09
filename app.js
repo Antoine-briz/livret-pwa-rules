@@ -43,16 +43,6 @@ function renderPage(pageNum, scale = 1) {
 }
 
 
-// Valeur initiale du zoom
-let currentZoom = 0.9;
-
-function changeZoom(delta) {
-    // Ajuste le facteur de zoom
-    currentZoom = Math.max(0.5, Math.min(2, currentZoom + delta));  // Garde le zoom entre 0.5 et 2
-
-    console.log("Zoom actuel : ", currentZoom);
-    renderPage(currentPage, currentZoom); // Re-render la page avec le nouveau zoom
-}
 
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
@@ -134,33 +124,6 @@ export function openPDF(pdfPath) {
     });
 
     appContainer.appendChild(backButton);
-
-// Créer un conteneur pour les boutons de zoom en bas à droite
-const zoomContainer = document.createElement('div');
-zoomContainer.id = "zoom-buttons";
-zoomContainer.style.position = "absolute";
-zoomContainer.style.bottom = "20px";  // Espacement du bas
-zoomContainer.style.right = "20px";   // Espacement à droite
-zoomContainer.style.zIndex = "999";   // Pour s'assurer que les boutons sont visibles au-dessus du contenu PDF
-
-// Créer le bouton Zoom +
-const zoomInButton = document.createElement('button');
-zoomInButton.textContent = "+";
-zoomInButton.style.fontSize = "24px";  // Taille du texte pour le bouton +
-zoomInButton.addEventListener("click", () => changeZoom(0.1));  // Augmenter le zoom
-
-// Créer le bouton Zoom -
-const zoomOutButton = document.createElement('button');
-zoomOutButton.textContent = "-";
-zoomOutButton.style.fontSize = "24px";  // Taille du texte pour le bouton -
-zoomOutButton.addEventListener("click", () => changeZoom(-0.1)); // Diminuer le zoom
-
-// Ajouter les boutons dans le conteneur
-zoomContainer.appendChild(zoomInButton);
-zoomContainer.appendChild(zoomOutButton);
-
-// Ajouter le conteneur des boutons de zoom dans le document
-document.getElementById('pdfViewer').appendChild(zoomContainer);
 
     
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
@@ -319,6 +282,45 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-// Votre code existant...
+let currentZoom = 0.75; // Valeur initiale du zoom
+let initialDistance = 0; // Distance initiale entre les deux doigts lors du premier toucher
 
+// Fonction pour calculer la distance entre les deux doigts (en pixels)
+function getDistance(touch1, touch2) {
+    const dx = touch1.pageX - touch2.pageX;
+    const dy = touch1.pageY - touch2.pageY;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+
+// Ajout d'un écouteur d'événements pour détecter le zoom tactile
+document.getElementById('pdfViewer').addEventListener('touchstart', function(event) {
+    if (event.touches.length === 2) {
+        // Calculer la distance initiale entre les deux doigts au début du toucher
+        initialDistance = getDistance(event.touches[0], event.touches[1]);
+    }
+}, false);
+
+document.getElementById('pdfViewer').addEventListener('touchmove', function(event) {
+    if (event.touches.length === 2) {
+        // Calculer la distance actuelle entre les deux doigts pendant le mouvement
+        const currentDistance = getDistance(event.touches[0], event.touches[1]);
+
+        // Si la distance change, on applique un zoom
+        if (currentDistance !== initialDistance) {
+            const zoomChange = currentDistance / initialDistance; // Le facteur de zoom
+            currentZoom = Math.max(0.5, Math.min(2, currentZoom * zoomChange)); // Limiter le zoom entre 0.5 et 2
+            initialDistance = currentDistance; // Mettre à jour la distance initiale pour le prochain mouvement
+
+            console.log("Zoom actuel : ", currentZoom);
+            renderPage(currentPage, currentZoom); // Re-render la page avec le nouveau zoom
+        }
+    }
+}, false);
+
+// Si l'utilisateur relâche les doigts, réinitialiser la distance
+document.getElementById('pdfViewer').addEventListener('touchend', function(event) {
+    if (event.touches.length < 2) {
+        initialDistance = 0; // Réinitialiser la distance lorsqu'il n'y a plus que 1 doigt
+    }
+}, false);
 
