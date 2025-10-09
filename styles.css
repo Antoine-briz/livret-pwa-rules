@@ -419,3 +419,86 @@ footer {
   border-top: none; /* Assurez-vous qu'il n'y a pas de bordure blanche au-dessus du footer */
 }
 
+/* Le conteneur du livre */
+.book-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1500px; /* Perspective 3D pour un effet de profondeur */
+  height: 100vh;
+}
+
+.book {
+  position: relative;
+  width: 80%; /* Ajustez la taille du livre */
+  height: 500px; /* Hauteur du livre */
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 1s ease-in-out; /* Animation de l'ouverture */
+}
+
+/* La couverture du livre */
+.cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Masquer la couverture lorsqu'elle est tournée */
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ajuster l'image pour occuper tout l'espace */
+  cursor: pointer;
+}
+
+/* Pages du livre */
+.pages {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  visibility: hidden; /* Masquer les pages tant que le livre est fermé */
+}
+
+/* Pages gauche et droite */
+.page-left, .page-right {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  box-shadow: inset -5px 0 15px rgba(0, 0, 0, 0.1); /* Ombre intérieure pour l'effet page */
+  backface-visibility: hidden;
+  transition: transform 1s ease-in-out;
+}
+
+.page-left {
+  left: 0;
+  transform-origin: right; /* Rotation de la page depuis la droite */
+}
+
+.page-right {
+  right: 0;
+  transform-origin: left; /* Rotation de la page depuis la gauche */
+}
+
+/* État après le clic (livre ouvert) */
+.book.opened {
+  transform: rotateY(120deg); /* Rotation pour donner l'effet d'ouverture */
+}
+
+.book.opened .pages {
+  visibility: visible; /* Montrer les pages lorsque le livre est ouvert */
+}
+
+.book.opened .page-left {
+  transform: rotateY(-180deg); /* Rotation de la page gauche */
+}
+
+.book.opened .page-right {
+  transform: rotateY(180deg); /* Rotation de la page droite */
+}
