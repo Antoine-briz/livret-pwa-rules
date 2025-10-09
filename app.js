@@ -232,7 +232,8 @@ window.addEventListener("load", mount);  // Met à jour la page au chargement de
 // Ajout manuel des fichiers au cache après l'enregistrement du service worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')  // Assurez-vous que le fichier sw.js est à la racine
+    navigator.serviceWorker.register('/livret-pwa-rules/sw.js')
+ // Assurez-vous que le fichier sw.js est à la racine
       .then((registration) => {
         console.log('Service Worker enregistré avec succès:', registration);
 
