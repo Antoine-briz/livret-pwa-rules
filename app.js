@@ -110,10 +110,6 @@ export function openPDF(pdfPath) {
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
-    // Créer un bouton "Retour" pour revenir au menu principal
-    const backButton = document.createElement("button");
-    backButton.textContent = "Retour";
-    backButton.classList.add("btn");
 
     // Ajouter un événement "click" au bouton
    const backButton = document.createElement("button");
