@@ -7,6 +7,7 @@ document.getElementById('cover-img').addEventListener('click', function() {
     document.getElementById('menu').style.display = 'block';  // Afficher le menu
     document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
     populateMenu();  // Remplir le menu avec les liens des PDF
+    window.location.hash = "#/menu";  // Modifie l'URL pour afficher le menu
 });
 
 function renderPage(pageNum, scale = 1) {
@@ -217,7 +218,8 @@ function mount() {
 
 // Routes de l'application
 const routes = {
-    "#/": renderHome, // La route pour la page d'accueil
+    "#/": renderHome,  // Page d'accueil
+    "#/menu": renderMenu, La route pour la page d'accueil
     "#/echographie.pdf": () => openPDF("echographie.pdf"),
     "#/ventilation.pdf": () => openPDF("ventilation.pdf"),
     "#/bacterio.pdf": () => openPDF("bacterio.pdf"),
