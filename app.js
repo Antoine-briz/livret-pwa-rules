@@ -110,16 +110,16 @@ export function openPDF(pdfPath) {
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
-const backButtonHTML = `
-  <div class="actions">
-    <button type="button" class="btn ghost" onclick="history.back()">← Retour</button>
-  </div>
-`;
+const backButton = document.createElement("button");
+backButton.textContent = "Retour";
+backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
+backButton.addEventListener("click", () => {
+    window.location.hash = "#/"; // Redirige vers le menu principal
+});
 
-// Ajouter le bouton retour au conteneur
-appContainer.innerHTML += backButtonHTML; 
+// Ajouter le bouton "Retour" en dessous des autres boutons
+appContainer.appendChild(backButton);
 
-    
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
@@ -218,11 +218,17 @@ function mount() {
 // Routes de l'application
 const routes = {
     "#/": renderHome, // La route pour la page d'accueil
-    "#/menu": renderMenu, // La route pour le menu
-    "#/echographie": () => openPDF("echographie.pdf"), // Ouvre le PDF de l'échographie
-    "#/ventilation": () => openPDF("ventilation.pdf"), // Ouvre le PDF de la ventilation
-    "#/bacterio": () => openPDF("bacterio.pdf") // Ouvre le PDF de la bactériologie clinique
+    "#/echographie.pdf": () => openPDF("echographie.pdf"),
+    "#/ventilation.pdf": () => openPDF("ventilation.pdf"),
+    "#/bacterio.pdf": () => openPDF("bacterio.pdf"),
+    "#/dialyse.pdf": () => openPDF("dialyse.pdf"),
+    "#/eeg.pdf": () => openPDF("eeg.pdf"),
+    "#/systeme.pdf": () => openPDF("systeme.pdf"),
+    "#/medicaments.pdf": () => openPDF("medicaments.pdf"),
+    "#/tablemetiere.pdf": () => openPDF("tablemetiere.pdf"),
+    "#/tableabrev.pdf": () => openPDF("tableabrev.pdf"),
 };
+
 
 // 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
