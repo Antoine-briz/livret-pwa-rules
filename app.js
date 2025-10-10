@@ -110,22 +110,9 @@ export function openPDF(pdfPath) {
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
-    // Créer un bouton "Retour" pour revenir au menu principal
-// Créer un conteneur pour les actions
-const actionsContainer = document.createElement("div");
-actionsContainer.classList.add("actions");
+// Ajouter le bouton retour au conteneur
+appContainer.innerHTML += backButtonHTML;
 
-// Créer le bouton retour
-const backButton = document.createElement("button");
-backButton.type = "button";
-backButton.classList.add("btn", "ghost"); // classes comme atb-pwa
-backButton.textContent = "← Retour";
-backButton.onclick = () => {
-    history.back(); // exactement comme atb-pwa
-};
-
-// Ajouter le bouton au conteneur
-actionsContainer.appendChild(backButton);
 
 // Ajouter le conteneur à l'interface PDF
 appContainer.appendChild(actionsContainer);
