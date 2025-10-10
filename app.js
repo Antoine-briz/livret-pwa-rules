@@ -115,7 +115,8 @@ const backButton = document.createElement("button");
 backButton.textContent = "Retour";
 backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
 backButton.addEventListener("click", () => {
-    window.location.hash = "#/menu"; // Redirige vers le menu principal
+    window.location.hash = "#/";  // Modifie l'URL
+    renderMenu();  // Rerender le menu à chaque fois
 });
 
 // Ajouter le bouton "Retour" en dessous des autres boutons
