@@ -418,3 +418,59 @@ footer {
   text-align: center; /* Centrer le texte */
   border-top: none; /* Assurez-vous qu'il n'y a pas de bordure blanche au-dessus du footer */
 }
+
+/* Styles généraux pour les boutons */
+.btn {
+  background-color: #007bff;  /* Couleur bleue pour le bouton */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #0056b3;  /* Changement de couleur au survol */
+}
+
+.ghost {
+  background-color: transparent;
+  border: 2px solid #007bff;  /* Bordure bleue */
+  color: #007bff;
+}
+
+/* Spécifique au bouton "Retour" et son positionnement dans le PDF */
+#pdfViewer {
+  position: relative;  /* Position relative pour gérer l'emplacement du bouton */
+  padding-bottom: 70px;  /* Ajouter un padding en bas pour laisser de l'espace pour le bouton */
+}
+
+#pdfViewer .actions {
+  display: flex;
+  justify-content: center;  /* Centre le bouton horizontalement */
+  align-items: center;      /* Centre le bouton verticalement */
+  position: absolute;       /* Permet de positionner précisément */
+  bottom: 20px;             /* Le bouton est situé à 20px du bas du conteneur */
+  width: 100%;              /* Occupe toute la largeur */
+}
+
+#pdfViewer .actions button {
+  background-color: #ff5722;  /* Couleur de fond du bouton */
+  color: white;               /* Couleur du texte */
+  border: none;               /* Supprime la bordure du bouton */
+  border-radius: 5px;         /* Coins arrondis */
+  padding: 12px 24px;         /* Taille du bouton */
+  font-weight: bold;          /* Gras pour le texte */
+  font-size: 16px;            /* Taille de la police */
+  cursor: pointer;           /* Curseur de la souris */
+  transition: background-color 0.3s;  /* Transition pour le survol */
+}
+
+/* Changer la couleur du bouton lorsqu'il est survolé */
+#pdfViewer .actions button:hover {
+  background-color: #e64a19;  /* Couleur du bouton au survol */
+}
+
+
+
