@@ -47,15 +47,17 @@ function renderPage(pageNum, scale = 1) {
 function renderHome() {
     const appContainer = document.getElementById("app");
 
-    // Vider le contenu existant
+    // Vider l'élément #app avant de charger la page d'accueil
     appContainer.innerHTML = "";
 
-    // Ajouter l'image couverture
+    // Créer l'élément contenant l'image de couverture
     const coverImage = document.createElement("img");
-    coverImage.src = "img/couverture.png";  // Chemin de l'image couverture
-    coverImage.alt = "Couverture";  // Texte alternatif
-    coverImage.id = "cover-img";  // ID pour le clic sur l'image
+    coverImage.src = "img/couverture.png";
+    coverImage.alt = "Couverture";
+    coverImage.id = "cover-img";  // Lien pour l'interaction avec l'image de couverture
+    coverImage.classList.add("cover-img");
 
+    // Ajouter l'image au conteneur #app
     appContainer.appendChild(coverImage);
 }
 
@@ -165,7 +167,7 @@ function renderMenu() {
     menuImage.style.width = "100%";  // Ajuster la largeur de l'image
     appContainer.appendChild(menuImage);
 
-    // Ajouter les boutons "Table des matières" et "Table des abréviations"
+    // Créer et ajouter les boutons "Table des matières" et "Table des abréviations"
     const tableOfContentsButton = document.createElement("button");
     tableOfContentsButton.textContent = "Table des matières";
     tableOfContentsButton.id = "table-of-contents";
@@ -176,13 +178,14 @@ function renderMenu() {
     abbreviationsButton.id = "abbreviations";
     abbreviationsButton.addEventListener("click", () => openPDF("tableabrev.pdf"));
 
-    // Ajouter les boutons au conteneur (uniquement ici)
+    // Ajouter les boutons au conteneur
     appContainer.appendChild(tableOfContentsButton);
     appContainer.appendChild(abbreviationsButton);
 
-    // Créer et remplir le menu avec les liens vers les PDFs (ce qui ajoutera les images des PDFs)
+    // Remplir le menu avec les liens vers les PDFs
     populateMenu();  // Remplir le menu avec les liens vers les PDFs
 }
+
 
 function populateMenu() {
     const imgList = [
@@ -218,16 +221,8 @@ function populateMenu() {
         // Ajouter l'élément div au conteneur du menu
         imgContainer.appendChild(imgDiv);
     });
-
-    // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
-    document.getElementById("table-of-contents").addEventListener("click", function() {
-        openPDF("tablemetiere.pdf");  // Ouvrir le PDF des tables des matières
-    });
-
-    document.getElementById("abbreviations").addEventListener("click", function() {
-        openPDF("tableabrev.pdf");  // Ouvrir le PDF des tables des abréviations
-    });
 }
+
 
 
 // 6. Fonction pour monter le contenu en fonction du hash dans l'URL
