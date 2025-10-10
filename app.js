@@ -110,12 +110,14 @@ export function openPDF(pdfPath) {
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
+const backButtonHTML = `
+  <div class="actions">
+    <button type="button" class="btn ghost" onclick="history.back()">← Retour</button>
+  </div>
+`;
+
 // Ajouter le bouton retour au conteneur
-appContainer.innerHTML += backButtonHTML;
-
-
-// Ajouter le conteneur à l'interface PDF
-appContainer.appendChild(actionsContainer);
+appContainer.innerHTML += backButtonHTML; 
 
     
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
