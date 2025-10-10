@@ -111,18 +111,24 @@ export function openPDF(pdfPath) {
     appContainer.appendChild(navContainer);
 
     // Créer un bouton "Retour" pour revenir au menu principal
-    const backButton = document.createElement("button");
-    backButton.textContent = "Retour";
-    backButton.classList.add("btn");
+// Créer un conteneur pour les actions
+const actionsContainer = document.createElement("div");
+actionsContainer.classList.add("actions");
 
-    // Ajouter un événement "click" au bouton
-    backButton.addEventListener("click", () => {
-        console.log("Le bouton 'Retour' a été cliqué.");
-        window.location.hash = "#/"; // change le hash
-        mount(); // force le rendu du menu principal
-    });
+// Créer le bouton retour
+const backButton = document.createElement("button");
+backButton.type = "button";
+backButton.classList.add("btn", "ghost"); // classes comme atb-pwa
+backButton.textContent = "← Retour";
+backButton.onclick = () => {
+    history.back(); // exactement comme atb-pwa
+};
 
-    appContainer.appendChild(backButton);
+// Ajouter le bouton au conteneur
+actionsContainer.appendChild(backButton);
+
+// Ajouter le conteneur à l'interface PDF
+appContainer.appendChild(actionsContainer);
 
     
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
