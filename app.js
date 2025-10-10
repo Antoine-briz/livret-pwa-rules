@@ -110,7 +110,13 @@ export function openPDF(pdfPath) {
     navContainer.appendChild(nextButton);
     appContainer.appendChild(navContainer);
 
-const backButton = document.createElement("button");
+    // Créer un bouton "Retour" pour revenir au menu principal
+    const backButton = document.createElement("button");
+    backButton.textContent = "Retour";
+    backButton.classList.add("btn");
+
+    // Ajouter un événement "click" au bouton
+   const backButton = document.createElement("button");
 backButton.textContent = "Retour";
 backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
 backButton.addEventListener("click", () => {
@@ -120,6 +126,7 @@ backButton.addEventListener("click", () => {
 // Ajouter le bouton "Retour" en dessous des autres boutons
 appContainer.appendChild(backButton);
 
+    
     // Cacher le menu et les autres éléments, afficher uniquement le PDF
     document.getElementById('menu').style.display = 'none';  // Masquer le menu
     document.querySelector('.welcome-page').style.display = 'none';  // Masquer la page d'accueil
@@ -216,6 +223,7 @@ function mount() {
 }
 
 // Routes de l'application
+// Routes de l'application
 const routes = {
     "#/": renderHome, // La route pour la page d'accueil
     "#/echographie.pdf": () => openPDF("echographie.pdf"),
@@ -228,7 +236,6 @@ const routes = {
     "#/tablemetiere.pdf": () => openPDF("tablemetiere.pdf"),
     "#/tableabrev.pdf": () => openPDF("tableabrev.pdf"),
 };
-
 
 // 7. Ajout des écouteurs d'événements pour détecter les changements dans l'URL et charger la bonne page
 window.addEventListener("hashchange", mount); // Met à jour la page quand le hash change
