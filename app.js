@@ -52,21 +52,15 @@ function renderHome() {
 
     // Créer l'élément contenant l'image de couverture
 // Créer le contenu de la page d'accueil
-const welcomeMessage = document.createElement("h2");
-welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
+// Créer l'élément contenant l'image de couverture
+const coverImage = document.createElement("img");
+coverImage.src = "img/couverture.png";
+coverImage.alt = "Couverture";
+coverImage.id = "cover-img";  // Lien pour l'interaction avec l'image de couverture
+coverImage.classList.add("cover-img");
 
-const menuImage = document.createElement("img");
-menuImage.src = "img/titre.png";  // Chemin de l'image
-menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
-menuImage.style.width = "100%";  // Ajuster la largeur de l'image
-
-const description = document.createElement("p");
-description.textContent = "Cliquez sur l'image pour continuer.";
-
-// Ajouter le contenu dans le conteneur #app
-appContainer.appendChild(welcomeMessage);
-appContainer.appendChild(description);
-appContainer.appendChild(menuImage);
+// Ajouter l'image au conteneur #app
+appContainer.appendChild(coverImage);
 }
 
 // 2. Déclaration de la fonction openPDF
