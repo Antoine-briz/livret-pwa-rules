@@ -7,7 +7,6 @@ document.getElementById('cover-img').addEventListener('click', function() {
     document.getElementById('menu').style.display = 'block';  // Afficher le menu
     document.getElementById('livret-title-menu').style.display = 'block';  // Afficher le titre sur la page du menu
     populateMenu();  // Remplir le menu avec les liens des PDF
-    window.location.hash = "#/menu";  // Modifie l'URL pour afficher le menu
 });
 
 function renderPage(pageNum, scale = 1) {
@@ -43,24 +42,31 @@ function renderPage(pageNum, scale = 1) {
     });
 }
 
-// 1. Définir la fonction renderHome pour afficher uniquement l'image couverture et le footer
+
+
+// 1. Définir la fonction renderHome pour afficher la page d'accueil
 function renderHome() {
     const appContainer = document.getElementById("app");
 
-    // Vider l'élément #app avant de charger la page d'accueil
+    // Effacer le contenu existant
     appContainer.innerHTML = "";
 
-    // Créer l'élément contenant l'image de couverture
-// Créer le contenu de la page d'accueil
-// Créer l'élément contenant l'image de couverture
-const coverImage = document.createElement("img");
-coverImage.src = "img/couverture.png";
-coverImage.alt = "Couverture";
-coverImage.id = "cover-img";  // Lien pour l'interaction avec l'image de couverture
-coverImage.classList.add("cover-img");
+    // Créer le contenu de la page d'accueil
+    const welcomeMessage = document.createElement("h2");
+    welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
 
-// Ajouter l'image au conteneur #app
-appContainer.appendChild(coverImage);
+ const menuImage = document.createElement("img");
+    menuImage.src = "img/titre.png";  // Chemin de l'image
+    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
+    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
+
+    const description = document.createElement("p");
+    description.textContent = "Cliquez sur l'image pour continuer.";
+
+    // Ajouter le contenu dans le conteneur #app
+    appContainer.appendChild(welcomeMessage);
+    appContainer.appendChild(description);
+    appContainer.appendChild(menuImage);
 }
 
 // 2. Déclaration de la fonction openPDF
@@ -108,7 +114,7 @@ const backButton = document.createElement("button");
 backButton.textContent = "Retour";
 backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
 backButton.addEventListener("click", () => {
-     window.location.hash = "#/menu";  // Redirige vers le menu
+    window.location.hash = "#/"; // Redirige vers le menu principal
 });
 
 // Ajouter le bouton "Retour" en dessous des autres boutons
@@ -156,39 +162,8 @@ function goToPage(pageNum) {
     renderPage(pageNum);
 }
 
-function renderMenu() {
-    const appContainer = document.getElementById("app");
 
-    // Vider l'élément #app avant de charger le menu
-    appContainer.innerHTML = "";
-
-    // Ajouter l'image du titre (une seule fois)
-    const menuImage = document.createElement("img");
-    menuImage.src = "img/titre.png";  // Chemin de l'image titre
-    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
-    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
-    appContainer.appendChild(menuImage);
-
-    // Créer et ajouter les boutons "Table des matières" et "Table des abréviations"
-    const tableOfContentsButton = document.createElement("button");
-    tableOfContentsButton.textContent = "Table des matières";
-    tableOfContentsButton.id = "table-of-contents";
-    tableOfContentsButton.addEventListener("click", () => openPDF("tablemetiere.pdf"));
-
-    const abbreviationsButton = document.createElement("button");
-    abbreviationsButton.textContent = "Table des abréviations";
-    abbreviationsButton.id = "abbreviations";
-    abbreviationsButton.addEventListener("click", () => openPDF("tableabrev.pdf"));
-
-    // Ajouter les boutons au conteneur
-    appContainer.appendChild(tableOfContentsButton);
-    appContainer.appendChild(abbreviationsButton);
-
-    // Remplir le menu avec les liens vers les PDFs
-    populateMenu();  // Remplir le menu avec les liens vers les PDFs
-}
-
-
+// 5. Fonction pour remplir le menu avec les liens vers les PDFs
 function populateMenu() {
     const imgList = [
         { name: 'Echographie pratique', pdf: 'echographie.pdf', image: 'echographie.png' },
@@ -223,20 +198,26 @@ function populateMenu() {
         // Ajouter l'élément div au conteneur du menu
         imgContainer.appendChild(imgDiv);
     });
+  
+    // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
+    document.getElementById("table-of-contents").addEventListener("click", function() {
+        openPDF("tablemetiere.pdf");  // Ouvrir le PDF des tables des matières
+    });
+
+    document.getElementById("abbreviations").addEventListener("click", function() {
+        openPDF("tableabrev.pdf");  // Ouvrir le PDF des tables des abréviations
+    });
 }
-
-
 
 // 6. Fonction pour monter le contenu en fonction du hash dans l'URL
 function mount() {
-    const route = routes[location.hash] || renderMenu; // Assurez-vous que renderMenu est appelé à la place de renderHome
+    const route = routes[location.hash] || renderHome; // fallback si hash non défini
     route(); // affiche la page correspondante
 }
 
 // Routes de l'application
 const routes = {
-    "#/": renderHome,  // Page d'accueil
-    "#/menu": renderMenu,
+    "#/": renderHome, // La route pour la page d'accueil
     "#/echographie.pdf": () => openPDF("echographie.pdf"),
     "#/ventilation.pdf": () => openPDF("ventilation.pdf"),
     "#/bacterio.pdf": () => openPDF("bacterio.pdf"),
