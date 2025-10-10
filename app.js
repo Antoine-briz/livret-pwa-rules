@@ -115,38 +115,33 @@ appContainer.appendChild(backButton);
     console.log("URL complète du PDF : ", pdfUrl);
 
     // Créer un iframe pour afficher le PDF
-// Créer un iframe pour afficher le PDF
-const iframe = document.createElement("iframe");
-iframe.src = pdfUrl;
-iframe.style.width = "100%";  // Ajuste la largeur pour occuper tout l'espace disponible
-iframe.style.border = "none";  // Supprime les bordures
+    const iframe = document.createElement("iframe");
+    iframe.src = pdfUrl;
+    iframe.style.width = "100%"; // Ajuster la largeur pour occuper tout l'espace disponible
+    iframe.style.height = "100vh"; // Ajuster la hauteur pour occuper tout l'espace visible, en tenant compte de l'écran
+    iframe.style.border = "none";  // Enlever les bordures
 
-// Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
-iframe.style.transform = "scale(0.9)";  // Ajuste le zoom si nécessaire
-iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
+    // Appliquer un zoom dézoommant si nécessaire pour les écrans mobiles
+    iframe.style.transform = "scale(0.9)";  // Ajuste le zoom si nécessaire
+    iframe.style.transformOrigin = "top left"; // Centrer le zoom en haut à gauche
 
-// Créer un conteneur pour l'iframe et appliquer le style
-const iframeContainer = document.createElement("div");
-iframeContainer.id = "iframe-container"; // Ajouter un id pour cibler l'élément via CSS
-iframeContainer.appendChild(iframe);
-appContainer.appendChild(iframeContainer);
+    // Permettre le défilement horizontal et vertical si nécessaire
+    iframe.style.overflow = "auto"; // Permet le défilement horizontal et vertical
 
-// Ajuster la hauteur de l'iframe en fonction du contenu PDF
+    // Ajouter l'iframe à l'élément #pdfViewer
+    pdfViewer.appendChild(iframe);
+
+    // Correctement gérer les promesses avec `then` et `catch`
+// Correctement gérer les promesses avec `then` et `catch`
 pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
     pdfDoc = pdfDoc_;  // Initialiser pdfDoc avec le document PDF
     const scale = window.innerWidth < 768 ? 0.65 : 0.75;  // Zoom plus faible sur les petits écrans
     renderPage(1, scale);  // Afficher la première page du PDF avec le zoom calculé
-
-    // Ajuster dynamiquement la hauteur de l'iframe pour correspondre au PDF
-    pdfDoc.getPage(1).then(page => {
-        const viewport = page.getViewport({ scale: scale });
-        iframe.style.height = `${viewport.height + 50}px`;  // Ajuste la hauteur de l'iframe avec un espace supplémentaire
-    });
-
 }).catch((error) => {
     console.error("Erreur lors du chargement du PDF :", error);
 });
 }
+
 
 // 4. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
