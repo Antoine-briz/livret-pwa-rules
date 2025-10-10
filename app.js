@@ -99,7 +99,7 @@ export function openPDF(pdfPath) {
 backButton.textContent = "Retour";
 backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
 backButton.addEventListener("click", () => {
-    window.location.hash = "";  // Mettre un hash vide pour revenir à la page d'accueil
+    window.location.href = "https://antoine-briz.github.io/livret-pwa-rules/";  // Chemin absolu vers la page d'accueil
 });
 
 // Ajouter le bouton "Retour" en dessous des autres boutons
