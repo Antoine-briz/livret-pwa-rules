@@ -216,9 +216,32 @@ function renderMenu() {
     // Vider l'élément #app avant de charger le menu
     appContainer.innerHTML = "";
 
-    // Créer et remplir le menu avec les liens vers les PDFs
+    // Ajouter l'image du titre (une seule fois)
+    const menuImage = document.createElement("img");
+    menuImage.src = "img/titre.png";  // Chemin de l'image titre
+    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
+    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
+    appContainer.appendChild(menuImage);
+
+    // Ajouter les boutons "Table des matières" et "Table des abréviations"
+    const tableOfContentsButton = document.createElement("button");
+    tableOfContentsButton.textContent = "Table des matières";
+    tableOfContentsButton.id = "table-of-contents";
+    tableOfContentsButton.addEventListener("click", () => openPDF("tablemetiere.pdf"));
+
+    const abbreviationsButton = document.createElement("button");
+    abbreviationsButton.textContent = "Table des abréviations";
+    abbreviationsButton.id = "abbreviations";
+    abbreviationsButton.addEventListener("click", () => openPDF("tableabrev.pdf"));
+
+    // Ajouter les boutons au conteneur (uniquement ici)
+    appContainer.appendChild(tableOfContentsButton);
+    appContainer.appendChild(abbreviationsButton);
+
+    // Créer et remplir le menu avec les liens vers les PDFs (ce qui ajoutera les images des PDFs)
     populateMenu();  // Remplir le menu avec les liens vers les PDFs
 }
+
 
 // Routes de l'application
 const routes = {
