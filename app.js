@@ -237,7 +237,7 @@ function renderMenu() {
 // Routes de l'application
 const routes = {
     "#/": renderHome,  // Page d'accueil
-    "#/menu": renderMenu, La route pour la page d'accueil
+    "#/menu": renderMenu,
     "#/echographie.pdf": () => openPDF("echographie.pdf"),
     "#/ventilation.pdf": () => openPDF("ventilation.pdf"),
     "#/bacterio.pdf": () => openPDF("bacterio.pdf"),
