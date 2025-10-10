@@ -43,24 +43,20 @@ function renderPage(pageNum, scale = 1) {
     });
 }
 
-
-
-// 1. Définir la fonction renderHome pour afficher la page d'accueil
+// 1. Définir la fonction renderHome pour afficher uniquement l'image couverture et le footer
 function renderHome() {
     const appContainer = document.getElementById("app");
 
-    // Effacer le contenu existant
+    // Vider le contenu existant
     appContainer.innerHTML = "";
 
- const menuImage = document.createElement("img");
-    menuImage.src = "img/titre.png";  // Chemin de l'image
-    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
-    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
+    // Ajouter l'image couverture
+    const coverImage = document.createElement("img");
+    coverImage.src = "img/couverture.png";  // Chemin de l'image couverture
+    coverImage.alt = "Couverture";  // Texte alternatif
+    coverImage.id = "cover-img";  // ID pour le clic sur l'image
 
-    // Ajouter le contenu dans le conteneur #app
-    appContainer.appendChild(welcomeMessage);
-    appContainer.appendChild(description);
-    appContainer.appendChild(menuImage);
+    appContainer.appendChild(coverImage);
 }
 
 // 2. Déclaration de la fonction openPDF
@@ -108,8 +104,7 @@ const backButton = document.createElement("button");
 backButton.textContent = "Retour";
 backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
 backButton.addEventListener("click", () => {
-    window.location.hash = "#/";  // Modifie l'URL
-    renderMenu();  // Rerender le menu à chaque fois
+     window.location.hash = "#/menu";  // Redirige vers le menu
 });
 
 // Ajouter le bouton "Retour" en dessous des autres boutons
@@ -216,11 +211,6 @@ function renderMenu() {
     // Vider l'élément #app avant de charger le menu
     appContainer.innerHTML = "";
 
-    // Créer le titre du menu
-    const menuTitle = document.createElement("h2");
-    menuTitle.textContent = "Menu des PDFs";
-    appContainer.appendChild(menuTitle);
-
     // Ajouter l'image du titre (comme dans renderHome)
     const menuImage = document.createElement("img");
     menuImage.src = "img/titre.png";  // Chemin de l'image titre
@@ -246,8 +236,6 @@ function renderMenu() {
     // Créer et remplir le menu avec les liens vers les PDFs
     populateMenu();  // Remplir le menu avec les liens vers les PDFs
 }
-
-
 
 // Routes de l'application
 const routes = {
