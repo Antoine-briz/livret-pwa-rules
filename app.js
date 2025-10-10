@@ -57,11 +57,6 @@ function renderHome() {
     coverImage.id = "cover-img";  // ID pour le clic sur l'image
 
     appContainer.appendChild(coverImage);
-
-    coverImage.addEventListener('click', function() {
-        window.location.hash = "#/menu"; // Redirige vers le menu avec #/menu
-        renderMenu(); // Affiche le menu avec le contenu que tu souhaites
-    });
 }
 
 // 2. Déclaration de la fonction openPDF
@@ -157,8 +152,38 @@ function goToPage(pageNum) {
     renderPage(pageNum);
 }
 
+function renderMenu() {
+    const appContainer = document.getElementById("app");
 
-// 5. Fonction pour remplir le menu avec les liens vers les PDFs
+    // Vider l'élément #app avant de charger le menu
+    appContainer.innerHTML = "";
+
+    // Ajouter l'image du titre (une seule fois)
+    const menuImage = document.createElement("img");
+    menuImage.src = "img/titre.png";  // Chemin de l'image titre
+    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
+    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
+    appContainer.appendChild(menuImage);
+
+    // Ajouter les boutons "Table des matières" et "Table des abréviations"
+    const tableOfContentsButton = document.createElement("button");
+    tableOfContentsButton.textContent = "Table des matières";
+    tableOfContentsButton.id = "table-of-contents";
+    tableOfContentsButton.addEventListener("click", () => openPDF("tablemetiere.pdf"));
+
+    const abbreviationsButton = document.createElement("button");
+    abbreviationsButton.textContent = "Table des abréviations";
+    abbreviationsButton.id = "abbreviations";
+    abbreviationsButton.addEventListener("click", () => openPDF("tableabrev.pdf"));
+
+    // Ajouter les boutons au conteneur (uniquement ici)
+    appContainer.appendChild(tableOfContentsButton);
+    appContainer.appendChild(abbreviationsButton);
+
+    // Créer et remplir le menu avec les liens vers les PDFs (ce qui ajoutera les images des PDFs)
+    populateMenu();  // Remplir le menu avec les liens vers les PDFs
+}
+
 function populateMenu() {
     const imgList = [
         { name: 'Echographie pratique', pdf: 'echographie.pdf', image: 'echographie.png' },
@@ -193,7 +218,7 @@ function populateMenu() {
         // Ajouter l'élément div au conteneur du menu
         imgContainer.appendChild(imgDiv);
     });
-  
+
     // Attacher les gestionnaires d'événements aux boutons "Table des matières" et "Table des abréviations"
     document.getElementById("table-of-contents").addEventListener("click", function() {
         openPDF("tablemetiere.pdf");  // Ouvrir le PDF des tables des matières
@@ -204,44 +229,12 @@ function populateMenu() {
     });
 }
 
+
 // 6. Fonction pour monter le contenu en fonction du hash dans l'URL
 function mount() {
     const route = routes[location.hash] || renderMenu; // Assurez-vous que renderMenu est appelé à la place de renderHome
     route(); // affiche la page correspondante
 }
-
-function renderMenu() {
-    const appContainer = document.getElementById("app");
-
-    // Vider l'élément #app avant de charger le menu
-    appContainer.innerHTML = "";
-
-    // Ajouter l'image du titre (une seule fois)
-    const menuImage = document.createElement("img");
-    menuImage.src = "img/titre.png";  // Chemin de l'image titre
-    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
-    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
-    appContainer.appendChild(menuImage);
-
-    // Ajouter les boutons "Table des matières" et "Table des abréviations"
-    const tableOfContentsButton = document.createElement("button");
-    tableOfContentsButton.textContent = "Table des matières";
-    tableOfContentsButton.id = "table-of-contents";
-    tableOfContentsButton.addEventListener("click", () => openPDF("tablemetiere.pdf"));
-
-    const abbreviationsButton = document.createElement("button");
-    abbreviationsButton.textContent = "Table des abréviations";
-    abbreviationsButton.id = "abbreviations";
-    abbreviationsButton.addEventListener("click", () => openPDF("tableabrev.pdf"));
-
-    // Ajouter les boutons au conteneur (uniquement ici)
-    appContainer.appendChild(tableOfContentsButton);
-    appContainer.appendChild(abbreviationsButton);
-
-    // Créer et remplir le menu avec les liens vers les PDFs (ce qui ajoutera les images des PDFs)
-    populateMenu();  // Remplir le menu avec les liens vers les PDFs
-}
-
 
 // Routes de l'application
 const routes = {
