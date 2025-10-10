@@ -57,6 +57,11 @@ function renderHome() {
     coverImage.id = "cover-img";  // ID pour le clic sur l'image
 
     appContainer.appendChild(coverImage);
+
+    coverImage.addEventListener('click', function() {
+        window.location.hash = "#/menu"; // Redirige vers le menu avec #/menu
+        renderMenu(); // Affiche le menu avec le contenu que tu souhaites
+    });
 }
 
 // 2. Déclaration de la fonction openPDF
