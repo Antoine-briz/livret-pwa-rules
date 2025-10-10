@@ -507,4 +507,19 @@ footer {
   width: auto; /* Ajuste la largeur du bouton */
 }
 
+#iframe-container {
+    width: 100%;  /* Largeur de l'iframe, déjà ajustée */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;  /* Permet de centrer verticalement */
+    padding-top: 50px;  /* Ajuster l'espace au-dessus de l'iframe */
+}
+
+#iframe-container iframe {
+    width: 100%;  /* Assure que l'iframe occupe toute la largeur */
+    border: none;  /* Supprime les bordures */
+    margin: 0 auto;  /* Centrer horizontalement */
+    overflow: auto;
+}
+
 
