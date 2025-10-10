@@ -115,7 +115,7 @@ const backButton = document.createElement("button");
 backButton.textContent = "Retour";
 backButton.classList.add("btn"); // Utilise la classe btn pour un bon style
 backButton.addEventListener("click", () => {
-    window.location.hash = "#/"; // Redirige vers le menu principal
+    window.location.hash = "#/menu"; // Redirige vers le menu principal
 });
 
 // Ajouter le bouton "Retour" en dessous des autres boutons
@@ -215,6 +215,24 @@ function mount() {
     const route = routes[location.hash] || renderHome; // fallback si hash non défini
     route(); // affiche la page correspondante
 }
+
+function renderMenu() {
+    const appContainer = document.getElementById("app");
+
+    // Vider l'élément #app avant de charger le menu
+    appContainer.innerHTML = "";
+
+    // Créer le contenu du menu
+    const menuTitle = document.createElement("h2");
+    menuTitle.textContent = "Menu des PDFs";
+
+    // Ajouter le titre du menu
+    appContainer.appendChild(menuTitle);
+
+    // Remplir le menu avec des liens vers les PDF
+    populateMenu();  // Remplir le menu avec les liens des PDF
+}
+
 
 // Routes de l'application
 const routes = {
