@@ -52,13 +52,13 @@ function renderHome() {
 
     // Créer l'élément contenant l'image de couverture
     const coverImage = document.createElement("img");
-    coverImage.src = "img/couverture.png";
-    coverImage.alt = "Couverture";
-    coverImage.id = "cover-img";  // Lien pour l'interaction avec l'image de couverture
-    coverImage.classList.add("cover-img");
+coverImage.src = "img/couverture.png";
+coverImage.alt = "Couverture";
+coverImage.id = "cover-img";  // Lien pour l'interaction avec l'image de couverture
+coverImage.classList.add("cover-img");
 
-    // Ajouter l'image au conteneur #app
-    appContainer.appendChild(coverImage);
+// Ajouter l'image au conteneur #app
+appContainer.appendChild(coverImage);
 }
 
 // 2. Déclaration de la fonction openPDF
