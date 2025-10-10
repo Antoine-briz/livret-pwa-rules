@@ -52,17 +52,10 @@ function renderHome() {
     // Effacer le contenu existant
     appContainer.innerHTML = "";
 
-    // Créer le contenu de la page d'accueil
-    const welcomeMessage = document.createElement("h2");
-    welcomeMessage.textContent = "Bienvenue dans le livret PWA !";
-
  const menuImage = document.createElement("img");
     menuImage.src = "img/titre.png";  // Chemin de l'image
     menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
     menuImage.style.width = "100%";  // Ajuster la largeur de l'image
-
-    const description = document.createElement("p");
-    description.textContent = "Cliquez sur l'image pour continuer.";
 
     // Ajouter le contenu dans le conteneur #app
     appContainer.appendChild(welcomeMessage);
@@ -213,7 +206,7 @@ function populateMenu() {
 
 // 6. Fonction pour monter le contenu en fonction du hash dans l'URL
 function mount() {
-    const route = routes[location.hash] || renderHome; // fallback si hash non défini
+    const route = routes[location.hash] || renderMenu; // Assurez-vous que renderMenu est appelé à la place de renderHome
     route(); // affiche la page correspondante
 }
 
@@ -223,16 +216,37 @@ function renderMenu() {
     // Vider l'élément #app avant de charger le menu
     appContainer.innerHTML = "";
 
-    // Créer le contenu du menu
+    // Créer le titre du menu
     const menuTitle = document.createElement("h2");
     menuTitle.textContent = "Menu des PDFs";
-
-    // Ajouter le titre du menu
     appContainer.appendChild(menuTitle);
 
-    // Remplir le menu avec des liens vers les PDF
-    populateMenu();  // Remplir le menu avec les liens des PDF
+    // Ajouter l'image du titre (comme dans renderHome)
+    const menuImage = document.createElement("img");
+    menuImage.src = "img/titre.png";  // Chemin de l'image titre
+    menuImage.alt = "Livret de réanimation clinique";  // Texte alternatif
+    menuImage.style.width = "100%";  // Ajuster la largeur de l'image
+    appContainer.appendChild(menuImage);
+
+    // Créer les boutons "Table des matières" et "Table des abréviations"
+    const tableOfContentsButton = document.createElement("button");
+    tableOfContentsButton.textContent = "Table des matières";
+    tableOfContentsButton.id = "table-of-contents";
+    tableOfContentsButton.addEventListener("click", () => openPDF("tablemetiere.pdf"));
+
+    const abbreviationsButton = document.createElement("button");
+    abbreviationsButton.textContent = "Table des abréviations";
+    abbreviationsButton.id = "abbreviations";
+    abbreviationsButton.addEventListener("click", () => openPDF("tableabrev.pdf"));
+
+    // Ajouter les boutons au conteneur
+    appContainer.appendChild(tableOfContentsButton);
+    appContainer.appendChild(abbreviationsButton);
+
+    // Créer et remplir le menu avec les liens vers les PDFs
+    populateMenu();  // Remplir le menu avec les liens vers les PDFs
 }
+
 
 
 // Routes de l'application
