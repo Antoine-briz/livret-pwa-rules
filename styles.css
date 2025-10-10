@@ -472,5 +472,39 @@ footer {
   background-color: #e64a19;  /* Couleur du bouton au survol */
 }
 
+/* Styles pour le bouton retour */
+#pdfViewer .actions {
+  display: flex;
+  justify-content: center;  /* Centre le bouton */
+  margin-top: 20px;          /* Espacement au-dessus du bouton */
+}
+
+#pdfViewer button {
+  width: 50%; 
+  margin: 10px 0;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+#pdfViewer button:hover {
+  background-color: #0056b3;  /* Changement de couleur au survol */
+}
+
+#pdfViewer .ghost {
+  background-color: transparent;
+  border: 2px solid #007bff;
+  color: #007bff;
+}
+
+#pdfViewer .actions button {
+  display: block;
+  width: auto; /* Ajuste la largeur du bouton */
+}
 
 
