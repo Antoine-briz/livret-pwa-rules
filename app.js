@@ -146,7 +146,7 @@ pdfjsLib.getDocument(pdfUrl).promise.then(pdfDoc_ => {
 }).catch((error) => {
     console.error("Erreur lors du chargement du PDF :", error);
 });
-
+}
 
 // 4. Fonction pour aller à une page spécifique
 function goToPage(pageNum) {
