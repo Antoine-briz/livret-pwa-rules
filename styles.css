@@ -509,6 +509,7 @@ footer {
 #pdfViewer {
   width: 100%;
   height: 70vh; /* Ajuster la hauteur en fonction de l'écran */
+    margin-top: 10vh; 
   overflow: auto; /* Ajouter des barres de défilement si nécessaire */
   display: flex;
   justify-content: flex-start;
@@ -520,20 +521,4 @@ footer {
   display: block;
   width: 100% !important;  /* Assurer que le canvas remplit toute la largeur */
   height: auto !important;  /* Adapter la hauteur en fonction de la largeur */
-}
-
-#pdfViewer {
-  display: flex;
-  justify-content: center; /* Centrer horizontalement */
-  align-items: center; /* Centrer verticalement */
-  width: 100%;
-  height: 80vh; /* Ajuster la hauteur selon ton besoin */
-  overflow: hidden; /* Masquer l'excédent si nécessaire */
-}
-
-#pdfViewer iframe {
-  width: 100%; /* S'assurer que l'iframe occupe toute la largeur disponible */
-  height: 100%; /* S'assurer que l'iframe occupe toute la hauteur disponible */
-  border: none; /* Retirer toute bordure, si présente */
-  object-fit: contain; /* Assurer que le contenu du PDF s'adapte sans être déformé */
 }
