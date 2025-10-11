@@ -15,32 +15,37 @@ function renderPage(pageNum, scale = 1) {
     // Vérifier les limites des pages
     if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
 
-    pdfDoc.getPage(pageNum).then(page => {
-        const canvas = document.createElement('canvas');
-        viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
-        viewer.appendChild(canvas);
+    function renderPage(pageNum) {
+  const viewer = document.getElementById('pdfViewer');
 
-        const context = canvas.getContext('2d');
+  // Vérifier les limites des pages
+  if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
 
-        // Utiliser la valeur dynamique de scale pour le zoom
-        // Nous maintenons scale à la valeur du zoom actuel
-        const dpi = window.devicePixelRatio || 3;
+  pdfDoc.getPage(pageNum).then(page => {
+    const canvas = document.createElement('canvas');
+    viewer.innerHTML = ''; // Réinitialiser la vue avant d'ajouter une nouvelle page
+    viewer.appendChild(canvas);
 
-        // Calculer l'échelle pour une taille lisible mais optimale
-        const viewport = page.getViewport({ scale: scale });
+    const context = canvas.getContext('2d');
+    const scale = 0.75;  // Ajuster l'échelle pour la mise en page du PDF (remplacer le 1.5 d'origine)
+    const dpi = window.devicePixelRatio || 3; // Utiliser la densité de pixels pour des écrans haute résolution
+    const viewport = page.getViewport({ scale: scale });
 
-        canvas.width = viewport.width * dpi;
-        canvas.height = viewport.height * dpi;
+    // Ajuster la taille du canvas pour correspondre à la densité de pixels
+    canvas.width = viewport.width * dpi;
+    canvas.height = viewport.height * dpi;
 
-        // Appliquer le DPI au contexte pour plus de détails
-        context.setTransform(dpi, 0, 0, dpi, 0, 0);
+    // Ajuster le contexte pour la densité de pixels
+    context.setTransform(dpi, 0, 0, dpi, 0, 0);
 
-        // Rendu de la page sur le canvas
-        page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
-            currentPage = pageNum;
-        });
+    // Rendu de la page sur le canvas
+    page.render({ canvasContext: context, viewport: viewport }).promise.then(() => {
+      // Mettre à jour la page actuelle
+      currentPage = pageNum;
     });
+  });
 }
+
 
 
 
