@@ -522,3 +522,7 @@ footer {
   width: 100% !important;  /* Assurer que le canvas remplit toute la largeur */
   height: auto !important;  /* Adapter la hauteur en fonction de la largeur */
 }
+
+#home .hero-img { 
+  border-radius: 0; /* Retirer les coins arrondis uniquement pour l'image "titre.png" */
+}
