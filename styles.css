@@ -172,15 +172,6 @@
 }
 
 
-/* 8. Ajouter un dézoom supplémentaire pour les petits écrans (smartphone) */
-@media screen and (max-width: 768px) {
-    #pdfViewer iframe {
-        transform: scale(0.65);  /* Zoom plus faible pour les petits écrans */
-    }
-}
-
-
-
 #menu {
     text-align: center;
     margin-top: 0;          /* supprimer l'espace au-dessus */
@@ -530,20 +521,3 @@ footer {
   width: 100% !important;  /* Assurer que le canvas remplit toute la largeur */
   height: auto !important;  /* Adapter la hauteur en fonction de la largeur */
 }
-
-@media screen and (max-width: 768px) {
-    #pdfViewer iframe {
-        transform: scale(0.65);  /* Zoom plus faible pour les petits écrans */
-        transform-origin: top left; /* Centrer l'iframe à partir du coin supérieur gauche */
-        width: 100%;
-        height: auto;
-    }
-
-    #pdfViewer {
-        width: 100%;
-        height: auto;
-        overflow: hidden;
-    }
-}
-
-
