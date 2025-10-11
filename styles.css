@@ -517,7 +517,7 @@ footer {
 /* Assurer que l'affichage du PDF dans le viewer s'ajuste correctement */
 #pdfViewer {
   width: 100%;
-  height: 80vh; /* Ajuster la hauteur en fonction de l'écran */
+  height: 70vh; /* Ajuster la hauteur en fonction de l'écran */
   overflow: auto; /* Ajouter des barres de défilement si nécessaire */
   display: flex;
   justify-content: flex-start;
