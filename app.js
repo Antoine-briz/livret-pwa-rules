@@ -9,13 +9,7 @@ document.getElementById('cover-img').addEventListener('click', function() {
     populateMenu();  // Remplir le menu avec les liens des PDF
 });
 
-function renderPage(pageNum, scale = 1) {
-    const viewer = document.getElementById('pdfViewer');
-
-    // Vérifier les limites des pages
-    if (pageNum < 1 || pageNum > pdfDoc.numPages) return;
-
-    function renderPage(pageNum) {
+function renderPage(pageNum) {
   const viewer = document.getElementById('pdfViewer');
 
   // Vérifier les limites des pages
@@ -27,8 +21,8 @@ function renderPage(pageNum, scale = 1) {
     viewer.appendChild(canvas);
 
     const context = canvas.getContext('2d');
-    const scale = 0.75;  // Ajuster l'échelle pour la mise en page du PDF (remplacer le 1.5 d'origine)
-    const dpi = window.devicePixelRatio || 3; // Utiliser la densité de pixels pour des écrans haute résolution
+    const scale = 0.75;  // Ajuster l'échelle pour la mise en page du PDF
+    const dpi = window.devicePixelRatio || 2; // Haute résolution pour les écrans modernes
     const viewport = page.getViewport({ scale: scale });
 
     // Ajuster la taille du canvas pour correspondre à la densité de pixels
@@ -45,8 +39,6 @@ function renderPage(pageNum, scale = 1) {
     });
   });
 }
-
-
 
 
 // 1. Définir la fonction renderHome pour afficher la page d'accueil
